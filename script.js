@@ -12,7 +12,7 @@ const setEyeBallPosition = function ({ clientX, clientY }) {
         eyeBallElement.style.top = `${percentPositionY}%`;
         eyeBallElement.style.left = `${percentPositionX}%`;
     });
-}
+};
 
 const controlEyeBallFollowing = function (followMovement = false) {
     const passiveTimeMin = 1000;
@@ -38,13 +38,13 @@ const controlEyeBallFollowing = function (followMovement = false) {
 
         controlEyeBallFollowing(!followMovement);
     }, followMovement ? passiveTime : activeTime);
-}
+};
 
 const closeAllDropdowns = function () {
     document.querySelectorAll(`.${dropdownOpenerClass}`).forEach(({ parentNode: { classList: parentClassList } }) => {
         parentClassList.remove(openDropdownClass);
     });
-}
+};
 
 // Make the eyeball follow the cursor:
 controlEyeBallFollowing(true);
