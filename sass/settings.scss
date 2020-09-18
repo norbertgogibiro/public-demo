@@ -1,0 +1,21 @@
+// COLORS:
+$color-yellow: #efead0;
+$color-black: #1b1c13;
+$color-orange: #f26539;
+$color-blue: #1e3ba7;
+$color-transparent: rgba(0, 0, 0, 0);
+
+// FONTS:
+@font-face {
+  font-family: BourtonBase;
+  src: url(Bourton-Base.ttf);
+}
+
+// TIMING:
+$speed-normal: 0.2s;
+
+// SPACING:
+$eye-hover-area-margin: 3em;
+$screen-edge-horizontal-margin: 2em;
+$screen-edge-vertical-margin: 2em;
+$border-line-width: 3px;

@@ -1,0 +1,10 @@
+@import './paths';
+
+@keyframes star-path {
+  from {
+    d: path($path-star-start);
+  }
+  to {
+    d: path($path-star-end);
+  }
+}

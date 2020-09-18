@@ -1,0 +1,19 @@
+@import './paths';
+
+@keyframes cloud-right {
+  from {
+    left: 89%;
+  }
+  to {
+    left: 79%;
+  }
+}
+
+@keyframes cloud-right-shape-path {
+  from {
+    d: path($path-cloud-right-start);
+  }
+  to {
+    d: path($path-cloud-right-end);
+  }
+}

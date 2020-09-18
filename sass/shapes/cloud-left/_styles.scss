@@ -1,0 +1,17 @@
+
+@import './animations';
+
+.cloud-left {
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: cloud-left 5s ease-in-out infinite alternate-reverse;
+
+  .cloud-left-shape {
+    path {
+      transition: $speed-normal;
+      fill: $color-yellow;
+      animation: cloud-left-shape-path 2s ease-in-out infinite alternate-reverse;
+    }
+  }
+}

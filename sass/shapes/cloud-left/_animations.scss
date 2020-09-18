@@ -1,0 +1,19 @@
+@import './paths';
+
+@keyframes cloud-left {
+  from {
+    top: 0%;
+  }
+  to {
+    top: 20%;
+  }
+}
+
+@keyframes cloud-left-shape-path {
+  from {
+    d: path($path-cloud-left-start);
+  }
+  to {
+    d: path($path-cloud-left-end);
+  }
+}

@@ -1,0 +1,20 @@
+@import './animations';
+
+.star {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.4, 0.4);
+
+  .star-shape {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    path {
+      transition: $speed-normal;
+      fill: $color-black;
+      animation: star-path 0.7s ease-in-out infinite alternate-reverse;
+    }
+  }
+}

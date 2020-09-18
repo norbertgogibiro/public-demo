@@ -1,0 +1,67 @@
+@import './paths';
+
+@keyframes eye-lids-path {
+  0% {
+    d: path($path-eyeLids-close);
+  }
+  1% {
+    d: path($path-eyeLids-open);
+  }
+  19% {
+    d: path($path-eyeLids-open);
+  }
+  20% {
+    d: path($path-eyeLids-close);
+  }
+  21% {
+    d: path($path-eyeLids-open);
+  }
+  50% {
+    d: path($path-eyeLids-open);
+  }
+  51% {
+    d: path($path-eyeLids-close);
+  }
+  52% {
+    d: path($path-eyeLids-open);
+  }
+  56% {
+    d: path($path-eyeLids-open);
+  }
+  57% {
+    d: path($path-eyeLids-close);
+  }
+  58% {
+    d: path($path-eyeLids-open);
+  }
+  78% {
+    d: path($path-eyeLids-open);
+  }
+  79% {
+    d: path($path-eyeLids-close);
+  }
+  80% {
+    d: path($path-eyeLids-open);
+  }
+  94% {
+    d: path($path-eyeLids-open);
+  }
+  95% {
+    d: path($path-eyeLids-close);
+  }
+  96% {
+    d: path($path-eyeLids-open);
+  }
+  100% {
+    d: path($path-eyeLids-open);
+  }
+}
+
+@keyframes eye-lids-hover {
+  from {
+    d: path($path-eyeLids-open);
+  }
+  to {
+    d: path($path-eyeLids-close);
+  }
+}

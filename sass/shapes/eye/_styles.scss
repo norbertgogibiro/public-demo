@@ -1,0 +1,78 @@
+@import './animations';
+
+.eye {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  background: $color-yellow;
+  transform: translate(-50%, -50%) scale(0.3, 0.3);
+
+  &:after {
+    content: "";
+    position: absolute;
+    top: $eye-hover-area-margin * -1;
+    bottom: $eye-hover-area-margin * -1;
+    left: $eye-hover-area-margin * -1;
+    right: $eye-hover-area-margin * -1;
+    border-radius: 50%;
+  }
+  
+  &:focus,
+  &:hover {
+    .eye-lids {
+      path {
+        animation: eye-lids-hover 0.05s ease-in-out;
+      }
+    }
+  }
+
+  &:not(:hover) {
+    .eye-lids {
+      path {
+        animation: eye-lids-path 12s ease-in-out 0.25s infinite alternate;
+      }
+    }
+  }
+}
+
+.eye-lids {
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  path {
+    transition: $speed-normal;
+    fill: $color-black;
+    d: path($path-eyeLids-close);
+  }
+}
+
+.eye-ball-clip {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(100% - #{$border-line-width});
+  height: calc(100% - #{$border-line-width});
+  overflow: hidden;
+  transform: translate(-50%, -50%);
+}
+
+.eye-ball-boundary {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 70%;
+  height: 70%;
+  transform: translate(-50%, -50%);
+}
+
+.eye-ball {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  border-radius: 50%;
+  background: $color-blue;
+  transition: $speed-normal;
+  transform: translate(-50%, -50%);
+}

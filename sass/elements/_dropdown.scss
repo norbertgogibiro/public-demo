@@ -1,0 +1,21 @@
+.dropdown-container {
+  position: relative;
+
+  .dropdown {
+    position: absolute;
+    display: none;
+    top: calc(100% - #{$border-line-width});
+    left: 50%;
+    padding: 1em;
+    transform: translateX(-50%);
+    background: $color-black;
+    color: $color-yellow;
+    border-top: $border-line-width solid $color-yellow;
+  }
+
+  &.dropdown-state-open {
+    .dropdown {
+      display: block;
+    }
+  }
+}

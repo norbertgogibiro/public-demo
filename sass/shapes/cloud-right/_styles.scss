@@ -1,0 +1,18 @@
+
+@import './animations';
+
+.cloud-right {
+  position: absolute;
+  top: 0;
+  left: 79%;
+  animation: cloud-right 7s ease-in-out 0.5s infinite alternate-reverse;
+
+  .cloud-right-shape {
+    path {
+      transition: $speed-normal;
+      fill: $color-yellow;
+      animation: cloud-right-shape-path 3s ease-in-out infinite alternate;
+      d: path($path-cloud-right-start);
+    }
+  }
+}

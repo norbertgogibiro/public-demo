@@ -47,7 +47,7 @@ const closeAllDropdowns = function () {
 };
 
 // Make the eyeball follow the cursor:
-controlEyeBallFollowing(true);
+// controlEyeBallFollowing(true);
 
 // Handle document keyup and click events:
 [...clickEvents, 'keyup'].forEach(eventName => document.addEventListener(eventName, function (event) {

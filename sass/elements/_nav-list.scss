@@ -1,0 +1,52 @@
+.nav-list {
+  display: flex;
+  width: 100%;
+  max-width: 40em;
+  margin: 1em auto;
+  justify-content: space-between;
+
+  li {
+    &:nth-child(odd) {
+      button {
+        color: $color-black;
+        
+        &:focus,
+        &:hover {
+          border-bottom: $border-line-width solid $color-yellow;
+        }
+      }
+    }
+
+    &:nth-child(even) {
+      button {
+        color: $color-yellow;
+
+        &:focus,
+        &:hover {
+          border-bottom: $border-line-width solid $color-black;
+        }
+      }
+    }
+  }
+
+  details {
+    width: 100%;
+  }
+
+  a {
+    display: block;
+    padding: 0.5em;
+
+    &,
+    &:active,
+    &:visited {
+      color: $color-yellow;
+      text-decoration: none;
+    }
+
+    &:focus,
+    &:hover {
+      color: $color-orange;
+    }
+  }
+}
