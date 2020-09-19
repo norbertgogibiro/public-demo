@@ -2,8 +2,9 @@
   display: flex;
   width: 100%;
   max-width: 50em;
-  margin: 1em auto;
+  margin: 3em auto;
   justify-content: space-between;
+  font-size: $size-letter-big;
 
   li {
     &:nth-child(odd) {

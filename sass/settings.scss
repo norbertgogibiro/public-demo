@@ -15,12 +15,13 @@ $speed-normal: 0.2s;
 
 // SIZES:
 $size-letter-normal: 15px;
-$size-letter-small: 0.7rem;
+$size-letter-big: $size-letter-normal * 1.4;
+$size-letter-small: $size-letter-normal * 0.7;
 
 // SPACING:
 $eye-hover-area-margin: 3rem;
 $screen-edge-horizontal-margin: 1rem;
-$screen-edge-vertical-margin: 1rem;
+$screen-edge-vertical-margin: 0;
 $border-line-width: 3px;
 
 // Z-INDEX LEVELS:
