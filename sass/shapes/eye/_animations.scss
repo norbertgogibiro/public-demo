@@ -132,7 +132,7 @@
   $path-eyeLids-simple-close
 );
 
-@keyframes eye-lids-simple-hover {
+@keyframes eye-lids-simple-path-close {
   from {
     d: path($path-eyeLids-simple-open);
   }

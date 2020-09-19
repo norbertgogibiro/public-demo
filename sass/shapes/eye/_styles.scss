@@ -34,7 +34,7 @@ $size-eyeball: 250px;
   &:hover {
     .eye-lids-simple {
       path {
-        animation: eye-lids-simple-hover 0.05s ease-in-out;
+        animation: eye-lids-simple-path-close 0.05s ease-in-out;
       }
     }
   }
@@ -42,8 +42,8 @@ $size-eyeball: 250px;
   &:not(:hover) {
     .eye-lids-simple {
       path {
-        animation: eye-lids-simple-path-sequence-short (60 * $speed-eye-blink) ease-in-out
-          0.25s infinite alternate;
+        animation: eye-lids-simple-path-sequence-short (60 * $speed-eye-blink)
+          ease-in-out 0.25s infinite alternate;
       }
     }
   }
@@ -89,7 +89,7 @@ $size-eyeball: 250px;
   border-radius: 50%;
   transition: $speed-normal;
   transform: translate(-50%, -50%);
-  background: red;
+  background: $color-blue;
   overflow: hidden;
 
   & > .eye-inner {
@@ -99,7 +99,6 @@ $size-eyeball: 250px;
     .eye-ball {
       width: $size-eyeball * 0.7;
       height: $size-eyeball * 0.7;
-      background: $color-blue;
 
       & > .eye-lids-simple {
         transform: translate(-50%, -50%) scale(0.5);
@@ -110,6 +109,41 @@ $size-eyeball: 250px;
           fill: $color-orange;
           animation: eye-lids-simple-path-sequence-short (60 * $speed-eye-blink)
             ease-in-out 0.5s infinite alternate-reverse;
+        }
+      }
+
+      & > .eye {
+        transform: translate(-50%, -50%) scale(0.25);
+        top: 50%;
+        left: 50%;
+        background: $color-yellow;
+        overflow: hidden;
+
+        .eye-ball {
+          width: $size-eyeball * 1.1;
+          height: $size-eyeball * 1.1;
+          background: $color-orange;
+        }
+
+        .eye-lids-simple {
+          position: absolute;
+          transform: translate(-50%, -50%);
+          top: 50%;
+          left: 50%;
+
+          path {
+            fill: $color-blue;
+            animation: eye-lids-simple-path-sequence-short
+              (60 * $speed-eye-blink) ease-in-out 0.5s infinite
+              alternate-reverse;
+          }
+
+          &.eye-lids-innermost {
+            path {
+              animation: eye-lids-simple-path-close $speed-eye-blink ease-in-out
+                0.7s forwards reverse;
+            }
+          }
         }
       }
     }
