@@ -2,6 +2,7 @@ const openDropdownClass = 'dropdown-state-open';
 const dropdownOpenerClass = 'dropdown-opener';
 const emailLinkClass = 'link-email';
 const currentYearContainerClass = 'current-year';
+const trippingEyeClass = 'is-tripping';
 const clickEvents = ['click', 'touchstart'];
 
 const setEyeBallPosition = function ({ clientX, clientY }) {
@@ -9,7 +10,7 @@ const setEyeBallPosition = function ({ clientX, clientY }) {
     const percentPositionX = (clientX * 100) / innerWidth;
     const percentPositionY = (clientY * 100) / innerHeight;
 
-    document.querySelectorAll('.eye-ball').forEach(eyeBallElement => {
+    document.querySelectorAll('.eye-ball-cursor-follower').forEach(eyeBallElement => {
         eyeBallElement.style.top = `${percentPositionY}%`;
         eyeBallElement.style.left = `${percentPositionX}%`;
     });
@@ -45,10 +46,12 @@ const closeAllDropdowns = function () {
     document.querySelectorAll(`.${dropdownOpenerClass}`).forEach(({ parentNode: { classList: parentClassList } }) => {
         parentClassList.remove(openDropdownClass);
     });
+
+    document.querySelector('.eye').classList.remove(trippingEyeClass);
 };
 
 // Make the eyeball follow the cursor:
-//controlEyeBallFollowing(true);
+controlEyeBallFollowing(true);
 
 // Handle document keyup and click events:
 [...clickEvents, 'keyup'].forEach(eventName => document.addEventListener(eventName, function (event) {
@@ -63,6 +66,7 @@ const closeAllDropdowns = function () {
 
         if (isClickEvent && target.classList.contains(dropdownOpenerClass)) {
             target.parentNode.classList.add(openDropdownClass);
+            document.querySelector('.eye').classList.add(trippingEyeClass);
         }
     }
 }));
