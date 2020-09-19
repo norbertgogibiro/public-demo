@@ -11,9 +11,9 @@ body {
 
 header {
   position: absolute;
-  top: $screen-edge-vertical-margin;
-  left: $screen-edge-horizontal-margin;
-  right: $screen-edge-horizontal-margin;
+  top: $margin-screen-edge-vertical;
+  left: $margin-screen-edge-horizontal;
+  right: $margin-screen-edge-horizontal;
   font-size: 18px;
   z-index: $level-layer-high;
 }
@@ -29,7 +29,7 @@ main {
 
 footer {
   position: absolute;
-  bottom: $screen-edge-vertical-margin;
+  bottom: $margin-screen-edge-vertical;
   width: 100%;
   text-align: right;
   z-index: $level-layer-high;
@@ -37,7 +37,7 @@ footer {
   small {
     display: inline-block;
     max-width: 25em;
-    padding: 0 $screen-edge-horizontal-margin;
+    padding: 0 $margin-screen-edge-horizontal;
     font-size: $size-letter-small;
   }
 }
@@ -61,8 +61,8 @@ button {
   font-family: inherit;
   background: none;
   border: none;
-  border-top: $border-line-width solid transparent;
-  border-bottom: $border-line-width solid transparent;
+  border-top: $width-border-line solid transparent;
+  border-bottom: $width-border-line solid transparent;
 
   &:focus {
     outline: none;

@@ -23,10 +23,10 @@ $size-eyeball: 250px;
   &:after {
     content: "";
     position: absolute;
-    top: $eye-hover-area-margin * -1;
-    bottom: $eye-hover-area-margin * -1;
-    left: $eye-hover-area-margin * -1;
-    right: $eye-hover-area-margin * -1;
+    top: $margin-eye-hoverArea * -1;
+    bottom: $margin-eye-hoverArea * -1;
+    left: $margin-eye-hoverArea * -1;
+    right: $margin-eye-hoverArea * -1;
     border-radius: 50%;
   }
 
@@ -65,8 +65,8 @@ $size-eyeball: 250px;
   position: absolute;
   top: 50%;
   left: 50%;
-  width: calc(100% - #{$border-line-width});
-  height: calc(#{$size-eye-height} - #{$border-line-width});
+  width: calc(100% - #{$width-border-line});
+  height: calc(#{$size-eye-height} - #{$width-border-line});
   overflow: hidden;
   transform: translate(-50%, -50%);
 }
