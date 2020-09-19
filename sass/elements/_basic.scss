@@ -31,7 +31,7 @@ footer {
   position: absolute;
   bottom: $screen-edge-vertical-margin;
   width: 100%;
-  text-align: center;
+  text-align: right;
   z-index: $level-layer-high;
 
   small {
@@ -81,5 +81,11 @@ a {
   &:hover {
     outline: none;
     text-decoration: none;
+  }
+}
+
+small {
+  p {
+    margin: 0.5em 0;
   }
 }
