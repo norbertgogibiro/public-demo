@@ -1,7 +1,7 @@
 .nav-list {
   display: flex;
   width: 100%;
-  max-width: 40em;
+  max-width: 50em;
   margin: 1em auto;
   justify-content: space-between;
 
@@ -9,7 +9,7 @@
     &:nth-child(odd) {
       button {
         color: $color-black;
-        
+
         &:focus,
         &:hover {
           border-bottom: $border-line-width solid $color-yellow;
@@ -27,6 +27,31 @@
         }
       }
     }
+
+    &:first-child {
+      .dropdown {
+        left: 0;
+        transform: none;
+      }
+    }
+
+    &:last-child {
+      .dropdown {
+        left: unset;
+        right: 0;
+        transform: none;
+      }
+    }
+  }
+
+  dt {
+    &:not(:first-of-type) {
+      margin-top: 1em;
+    }
+  }
+
+  dd {
+    margin: 0;
   }
 
   details {
@@ -34,19 +59,21 @@
   }
 
   a {
-    display: block;
-    padding: 0.5em;
+    &:not(.link-email) {
+      display: block;
+      padding: 0.5em;
 
-    &,
-    &:active,
-    &:visited {
-      color: $color-yellow;
-      text-decoration: none;
-    }
+      &,
+      &:active,
+      &:visited {
+        color: $color-yellow;
+        text-decoration: none;
+      }
 
-    &:focus,
-    &:hover {
-      color: $color-orange;
+      &:focus,
+      &:hover {
+        color: $color-orange;
+      }
     }
   }
 }

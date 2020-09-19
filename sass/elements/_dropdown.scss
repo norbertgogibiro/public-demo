@@ -1,3 +1,6 @@
+$triangle-size: 0.5em;
+$dropdown-z-index: $level-layer-top;
+
 .dropdown-container {
   position: relative;
 
@@ -11,9 +14,40 @@
     background: $color-black;
     color: $color-yellow;
     border-top: $border-line-width solid $color-yellow;
+    z-index: $dropdown-z-index;
   }
 
   &.dropdown-state-open {
+    .dropdown-opener {
+      &:before {
+        content: "";
+        position: absolute;
+        top: calc(100% - #{$triangle-size} - #{$border-line-width / 2});
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-left: calc(#{$triangle-size} + #{$border-line-width}) solid transparent;
+        border-right: calc(#{$triangle-size} + #{$border-line-width}) solid transparent;
+        border-bottom: calc(#{$triangle-size} + #{$border-line-width}) solid $color-yellow;
+        transform: translateX(-50%);
+        z-index: $dropdown-z-index - 1;
+      }
+
+      &:after {
+        content: "";
+        position: absolute;
+        top: calc(100% - #{$triangle-size} + #{$border-line-width});
+        left: 50%;
+        width: 0;
+        height: 0;
+        border-left: $triangle-size solid transparent;
+        border-right: $triangle-size solid transparent;
+        border-bottom: $triangle-size solid $color-black;
+        transform: translateX(-50%);
+        z-index: $dropdown-z-index + 1;
+      }
+    }
+
     .dropdown {
       display: block;
     }

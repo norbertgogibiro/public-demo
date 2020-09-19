@@ -3,7 +3,6 @@ $color-yellow: #efead0;
 $color-black: #1b1c13;
 $color-orange: #f26539;
 $color-blue: #1e3ba7;
-$color-transparent: rgba(0, 0, 0, 0);
 
 // FONTS:
 @font-face {
@@ -19,3 +18,10 @@ $eye-hover-area-margin: 3em;
 $screen-edge-horizontal-margin: 2em;
 $screen-edge-vertical-margin: 2em;
 $border-line-width: 3px;
+
+// Z-INDEX LEVELS:
+$level-layer-top: 100;
+$level-layer-high: 75;
+$level-layer-middle: 50;
+$level-layer-low: 25;
+$level-layer-bottom: 0;

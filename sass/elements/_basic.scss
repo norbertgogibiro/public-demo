@@ -14,6 +14,16 @@ header {
   left: $screen-edge-horizontal-margin;
   right: $screen-edge-horizontal-margin;
   font-size: 18px;
+  z-index: $level-layer-high;
+}
+
+main {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom:0;
+  right: 0;
+  z-index: $level-layer-middle;
 }
 
 footer {
@@ -24,32 +34,7 @@ footer {
   right: $screen-edge-horizontal-margin;
   align-items: flex-end;
   justify-content: space-between;
-
-  .dropdown-container {
-    li {
-      &:not(:last-of-type) {
-        margin-bottom: 1em;
-      }
-    }
-
-    button {
-      transition: color $speed-normal;
-
-      &:focus,
-      &:hover {
-        color: $color-yellow;
-      }
-    }
-
-    .dropdown {
-      top: unset;
-      left: unset;
-      bottom: calc(100% - #{$border-line-width});
-      right: 0;
-      transform: none;
-      border: none;
-    }
-  }
+  z-index: $level-layer-high;
 }
 
 ul {
@@ -60,6 +45,10 @@ li {
   list-style: none;
 }
 
+dl {
+  margin: 0;
+}
+
 button {
   cursor: pointer;
   padding: 0.5em;
@@ -67,8 +56,8 @@ button {
   font-family: inherit;
   background: none;
   border: none;
-  border-top: $border-line-width solid $color-transparent;
-  border-bottom: $border-line-width solid $color-transparent;
+  border-top: $border-line-width solid transparent;
+  border-bottom: $border-line-width solid transparent;
 
   &:focus {
     outline: none;
