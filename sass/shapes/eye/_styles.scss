@@ -4,12 +4,23 @@ $size-eyeball: 250px;
 
 .eye-clip {
   position: absolute;
-  width: 20px;
   height: 265px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(0.3, 0.3);
   overflow: hidden;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: $size-eye-height * 1.2;
+    height: $size-eye-height * 1.2;
+    border-radius: 0 70%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    background: $color-yellow;
+  }
 }
 
 .eye {
@@ -17,7 +28,6 @@ $size-eyeball: 250px;
   top: 50%;
   left: 50%;
   border-radius: 50%;
-  background: $color-yellow;
   transform: translate(-50%, -50%);
 
   &:after {
