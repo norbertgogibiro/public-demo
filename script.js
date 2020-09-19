@@ -1,6 +1,7 @@
 const openDropdownClass = 'dropdown-state-open';
 const dropdownOpenerClass = 'dropdown-opener';
 const emailLinkClass = 'link-email';
+const currentYearContainerClass = 'current-year';
 const clickEvents = ['click', 'touchstart'];
 
 const setEyeBallPosition = function ({ clientX, clientY }) {
@@ -99,4 +100,9 @@ document.querySelectorAll(`.${emailLinkClass}`).forEach(emailLink => {
         window.location.href = `mailto:${name}@${domain}.${tld}`;
         return false;
     }));
+});
+
+// Populate current year:
+document.querySelectorAll(`.${currentYearContainerClass}`).forEach(currentYearContainer => {
+    currentYearContainer.innerHTML = new Date().getFullYear();
 });
