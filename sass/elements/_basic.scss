@@ -21,20 +21,24 @@ main {
   position: absolute;
   top: 0;
   left: 0;
-  bottom:0;
+  bottom: 0;
   right: 0;
   z-index: $level-layer-middle;
 }
 
 footer {
   position: absolute;
-  display: flex;
   bottom: $screen-edge-vertical-margin;
-  left: $screen-edge-horizontal-margin;
-  right: $screen-edge-horizontal-margin;
-  align-items: flex-end;
-  justify-content: space-between;
+  width: 100%;
+  text-align: center;
   z-index: $level-layer-high;
+
+  small {
+    display: inline-block;
+    max-width: 25em;
+    padding: 0 $screen-edge-horizontal-margin;
+    font-size: $size-letter-small;
+  }
 }
 
 ul {
