@@ -39,11 +39,26 @@ $size-eyeball: 250px;
     }
   }
 
-  &:not(:hover) {
+  &:not(:hover):not(.is-tripping) {
     .eye-lids-simple {
       path {
         animation: eye-lids-simple-path-sequence-short (60 * $speed-eye-blink)
           ease-in-out 0.25s infinite alternate;
+      }
+    }
+  }
+
+  &.is-tripping {
+    .eye-ball {
+      & > .eye-inner {
+        transition: visibility $speed-eye-blink $speed-eye-blink;
+        visibility: visible;
+      }
+    }
+
+    .eye-lids-simple {
+      path {
+        animation: eye-lids-simple-path-close $speed-eye-blink ease-in-out 0s 2 forwards alternate;
       }
     }
   }
@@ -93,6 +108,7 @@ $size-eyeball: 250px;
   overflow: hidden;
 
   & > .eye-inner {
+    visibility: hidden;
     width: 100%;
     height: 100%;
 
