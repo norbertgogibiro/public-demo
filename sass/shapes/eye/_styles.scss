@@ -101,17 +101,29 @@ $size-eyeball: 250px;
       background: $color-orange;
     }
 
-    & > .eye-lids-cross {
+    & > .eye-lids {
       position: absolute;
       top: 50%;
       left: 50%;
-      transform: translate(-50%, -50%) scale(0.5);
-    
-      path {
-        transition: $speed-normal;
-        fill: $color-black;
-        d: path($path-eyeLids-cross-close);
-        animation: eye-lids-cross-path (60 * $speed-eye-blink) ease-in-out 0.5s infinite alternate-reverse;
+
+      &.eye-lids-simple {
+        transform: translate(-50%, -50%) scale(0.5) rotate(90deg);
+      
+        path {
+          fill: $color-yellow;
+          d: path($path-eyeLids-simple-open);
+          animation: none;
+        }
+      }
+
+      &.eye-lids-cross-outer {
+        transform: translate(-50%, -50%) scale(0.5);
+      
+        path {
+          fill: $color-black;
+          d: path($path-eyeLids-cross-outer-close);
+          animation: eye-lids-cross-outer-path (60 * $speed-eye-blink) ease-in-out 0.5s infinite alternate-reverse;
+        }
       }
     }
   }
