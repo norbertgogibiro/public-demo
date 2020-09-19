@@ -25,7 +25,7 @@ const controlEyeBallFollowing = function (followMovement = false) {
     const activeTime = Math.random() * (activeTimeMax - activeTimeMin) + activeTimeMin;
 
     setTimeout(() => {
-        document.querySelectorAll('.eye-ball').forEach(eyeBallElement => {
+        document.querySelectorAll('.eye-ball-cursor-follower').forEach(eyeBallElement => {
             if (followMovement) {
                 document.addEventListener('mousemove', setEyeBallPosition);
             }
@@ -48,7 +48,7 @@ const closeAllDropdowns = function () {
 };
 
 // Make the eyeball follow the cursor:
-// controlEyeBallFollowing(true);
+//controlEyeBallFollowing(true);
 
 // Handle document keyup and click events:
 [...clickEvents, 'keyup'].forEach(eventName => document.addEventListener(eventName, function (event) {
@@ -71,7 +71,7 @@ const closeAllDropdowns = function () {
 document.querySelectorAll(`.${dropdownOpenerClass}`).forEach(dropdownOpener => {
     clickEvents.forEach(eventName => dropdownOpener.addEventListener(eventName, function (event) {
         event.preventDefault();
-    
+
         const {
             target: {
                 parentNode: {
@@ -79,7 +79,7 @@ document.querySelectorAll(`.${dropdownOpenerClass}`).forEach(dropdownOpener => {
                 }
             }
         } = event;
-    
+
         if (!parentClassList.value.includes(openDropdownClass)) {
             parentClassList.add(openDropdownClass);
         }
