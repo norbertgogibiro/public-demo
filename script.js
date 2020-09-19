@@ -4,9 +4,11 @@ const emailLinkClass = 'link-email';
 const currentYearContainerClass = 'current-year';
 const trippingEyeClass = 'is-tripping';
 const clickEvents = ['click', 'touchstart'];
+let isEyeballFollowingLoop = true;
 
-const setEyeBallPosition = function ({ clientX, clientY }) {
+const setEyeBallPosition = function (event = {}) {
     const { innerWidth, innerHeight } = window;
+    const { clientX = innerWidth / 2, clientY = innerHeight / 2 } = event;
     const percentPositionX = (clientX * 100) / innerWidth;
     const percentPositionY = (clientY * 100) / innerHeight;
 
@@ -24,6 +26,7 @@ const controlEyeBallFollowing = function (followMovement = false) {
     const activeTimeMin = 4500;
     const activeTimeMax = 11500;
     const activeTime = Math.random() * (activeTimeMax - activeTimeMin) + activeTimeMin;
+    console.log('called', isEyeballFollowingLoop);
 
     setTimeout(() => {
         document.querySelectorAll('.eye-ball-cursor-follower').forEach(eyeBallElement => {
@@ -33,12 +36,13 @@ const controlEyeBallFollowing = function (followMovement = false) {
 
             else {
                 document.removeEventListener('mousemove', setEyeBallPosition);
-                eyeBallElement.style.top = '50%';
-                eyeBallElement.style.left = '50%';
+                setEyeBallPosition();
             }
         });
 
-        controlEyeBallFollowing(!followMovement);
+        if (isEyeballFollowingLoop) {
+            controlEyeBallFollowing(!followMovement);
+        }
     }, followMovement ? passiveTime : activeTime);
 };
 
@@ -48,6 +52,8 @@ const closeAllDropdowns = function () {
     });
 
     document.querySelector('.eye').classList.remove(trippingEyeClass);
+    document.addEventListener('mousemove', setEyeBallPosition);
+    isEyeballFollowingLoop = true;
 };
 
 // Make the eyeball follow the cursor:
@@ -67,6 +73,9 @@ controlEyeBallFollowing(true);
         if (isClickEvent && target.classList.contains(dropdownOpenerClass)) {
             target.parentNode.classList.add(openDropdownClass);
             document.querySelector('.eye').classList.add(trippingEyeClass);
+            document.removeEventListener('mousemove', setEyeBallPosition);
+            setEyeBallPosition();
+            isEyeballFollowingLoop = false;
         }
     }
 }));
