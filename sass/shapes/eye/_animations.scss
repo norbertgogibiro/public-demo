@@ -114,16 +114,22 @@
   }
 }
 
-@include blinking-keyframe-sequence-long(
-  eye-lids-simple-path,
+@include blinking-keyframe-sequence-short(
+  eye-lids-simple-path-sequence-short,
   $path-eyeLids-simple-open,
   $path-eyeLids-simple-close
 );
 
 @include blinking-keyframe-sequence-short(
-  eye-lids-cross-outer-path,
-  $path-eyeLids-cross-outer-open,
-  $path-eyeLids-cross-outer-close
+  eye-lids-cross-path-sequence-short,
+  $path-eyeLids-cross-open,
+  $path-eyeLids-cross-close
+);
+
+@include blinking-keyframe-sequence-long(
+  eye-lids-simple-path-sequence-long,
+  $path-eyeLids-simple-open,
+  $path-eyeLids-simple-close
 );
 
 @keyframes eye-lids-simple-hover {

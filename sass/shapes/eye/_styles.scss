@@ -42,7 +42,8 @@ $size-eyeball: 250px;
   &:not(:hover) {
     .eye-lids-simple {
       path {
-        animation: eye-lids-simple-path (60 * $speed-eye-blink) ease-in-out 0.25s infinite alternate;
+        animation: eye-lids-simple-path-sequence-short (60 * $speed-eye-blink) ease-in-out
+          0.25s infinite alternate;
       }
     }
   }
@@ -88,7 +89,7 @@ $size-eyeball: 250px;
   border-radius: 50%;
   transition: $speed-normal;
   transform: translate(-50%, -50%);
-  background: $color-blue;
+  background: red;
   overflow: hidden;
 
   & > .eye-inner {
@@ -98,7 +99,19 @@ $size-eyeball: 250px;
     .eye-ball {
       width: $size-eyeball * 0.7;
       height: $size-eyeball * 0.7;
-      background: $color-orange;
+      background: $color-blue;
+
+      & > .eye-lids-simple {
+        transform: translate(-50%, -50%) scale(0.5);
+        top: 50%;
+        left: 50%;
+
+        path {
+          fill: $color-orange;
+          animation: eye-lids-simple-path-sequence-short (60 * $speed-eye-blink)
+            ease-in-out 0.5s infinite alternate-reverse;
+        }
+      }
     }
 
     & > .eye-lids {
@@ -108,7 +121,7 @@ $size-eyeball: 250px;
 
       &.eye-lids-simple {
         transform: translate(-50%, -50%) scale(0.5) rotate(90deg);
-      
+
         path {
           fill: $color-yellow;
           d: path($path-eyeLids-simple-open);
@@ -116,13 +129,14 @@ $size-eyeball: 250px;
         }
       }
 
-      &.eye-lids-cross-outer {
+      &.eye-lids-cross {
         transform: translate(-50%, -50%) scale(0.5);
-      
+
         path {
           fill: $color-black;
-          d: path($path-eyeLids-cross-outer-close);
-          animation: eye-lids-cross-outer-path (60 * $speed-eye-blink) ease-in-out 0.5s infinite alternate-reverse;
+          d: path($path-eyeLids-cross-close);
+          animation: eye-lids-cross-path-sequence-short (60 * $speed-eye-blink)
+            ease-in-out 0.5s infinite alternate-reverse;
         }
       }
     }
