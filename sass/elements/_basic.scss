@@ -70,9 +70,16 @@ button {
 }
 
 a {
-  transition: color $speed-normal;
+  &,
+  &:active,
+  &:visited {
+    transition: color $speed-normal;
+    color: $color-yellow;
+  }
 
-  &:focus {
+  &:focus,
+  &:hover {
     outline: none;
+    text-decoration: none;
   }
 }
