@@ -169,6 +169,7 @@ controlEyeBallFollowing(true);
                 tearDropElement.className = dropClass;
                 tearDropElement.append(dropShapeElement);
                 tearDropElement.style.animationDelay = `${tearDropDelayOptions[index]}ms`;
+                tearDropElement.addEventListener('animationend', ({ target }) => target.parentNode.remove());
 
                 tearDropWrapperElement.className = dropWrapperClass;
                 tearDropWrapperElement.style.transform = `rotate(${rotationAmount}deg)`;
