@@ -32,7 +32,7 @@ const controlEyeBallFollowing = function (followMovement = false) {
 
     setTimeout(() => {
         document.querySelectorAll(`.${cursorFollowerEyeClass}:not(.${trippingEyeClass})`).forEach(eyeBallElement => {
-            if (followMovement) {
+            if (followMovement && isEyeballFollowingLoop) {
                 document.addEventListener('mousemove', setEyeBallPosition);
                 eyeBallElement.classList.add(cursorFollowingEyeClass);
             }
