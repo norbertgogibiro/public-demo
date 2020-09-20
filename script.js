@@ -66,18 +66,26 @@ const closeAllDropdowns = function () {
 // Make the eyeball follow the cursor:
 controlEyeBallFollowing(true);
 
-// Handle document keyup and click events:
-[...clickEvents, 'keyup'].forEach(eventName => document.addEventListener(eventName, function (event) {
-    //event.preventDefault();
-    const { target, key, type } = event;
-    const isClickEvent = clickEvents.includes(type);
+// Handle keyup and click events:
+[...clickEvents, 'keyup'].forEach(eventName => {
+    const isClickEvent = clickEvents.includes(eventName);
 
-    if (isClickEvent || (type === 'keyup' && key === 'Escape')) {
-        if (document.querySelectorAll(`.${openDropdownClass}`).length > 0) {
-            closeAllDropdowns();
+    // Handle events on the document:
+    document.addEventListener(eventName, function (event) {
+        const { target, key, type } = event;
+        const hasClickHappened = clickEvents.includes(type)
+    
+        if (hasClickHappened || (type === 'keyup' && key === 'Escape')) {
+    
+            // Close all dropdowns when any dropdown is open and
+            // the user clicks or presses escape:
+            if (document.querySelectorAll(`.${openDropdownClass}`).length > 0) {
+                closeAllDropdowns();
+            }
         }
 
-        if (isClickEvent && target.classList.contains(dropdownOpenerClass)) {
+        // Open dropdown if a dropdown opener is clicked:
+        if (hasClickHappened && target.classList.contains(dropdownOpenerClass)) {
             target.parentNode.classList.add(openDropdownClass);
             document.querySelector(`.${eyeClass}`).classList.add(trippingEyeClass);
             document.querySelector(`.${starClass}`).classList.add(grownStarClass);
@@ -85,43 +93,52 @@ controlEyeBallFollowing(true);
             setEyeBallPosition();
             isEyeballFollowingLoop = false;
         }
-    }
-}));
+    });
 
-// Handle dropdown openers:
-document.querySelectorAll(`.${dropdownOpenerClass}`).forEach(dropdownOpener => {
-    clickEvents.forEach(eventName => dropdownOpener.addEventListener(eventName, function (event) {
-        event.preventDefault();
+    // Only click events:
+    if(isClickEvent){
 
-        const {
-            target: {
-                parentNode: {
-                    classList: parentClassList
+        // Handle clicks on the dropdown openers:
+        document.querySelectorAll(`.${dropdownOpenerClass}`).forEach(dropdownOpener => {
+            dropdownOpener.addEventListener(eventName, function (event) {
+                event.preventDefault();
+
+                const {
+                    target: {
+                        parentNode: {
+                            classList: parentClassList
+                        }
+                    }
+                } = event;
+
+                if (!parentClassList.value.includes(openDropdownClass)) {
+                    parentClassList.add(openDropdownClass);
                 }
-            }
-        } = event;
+            });
+        });
 
-        if (!parentClassList.value.includes(openDropdownClass)) {
-            parentClassList.add(openDropdownClass);
-        }
-    }));
-});
+        // Handle email link clicks:
+        document.querySelectorAll(`.${emailLinkClass}`).forEach(emailLink => {
+            emailLink.addEventListener(eventName, function ({ target }) {
+                const {
+                    dataset: {
+                        name,
+                        domain,
+                        tld
+                    }
+                } = target;
 
-// Handle email link clicks:
-document.querySelectorAll(`.${emailLinkClass}`).forEach(emailLink => {
-    clickEvents.forEach(eventName => emailLink.addEventListener(eventName, function ({ target }) {
-        const {
-            dataset: {
-                name,
-                domain,
-                tld
-            }
-        } = target;
+                window.location.href = `mailto:${name}@${domain}.${tld}`;
+                return false;
+            });
+        });
 
-        window.location.href = `mailto:${name}@${domain}.${tld}`;
-        return false;
-    }));
-});
+        // Handle clicks on the main eye:
+        document.querySelector(`button.${eyeClass}`).addEventListener(eventName, function () {
+            alert();
+        });
+    }
+}); 
 
 // Populate current year:
 document.querySelectorAll(`.${currentYearContainerClass}`).forEach(currentYearContainer => {
@@ -129,6 +146,6 @@ document.querySelectorAll(`.${currentYearContainerClass}`).forEach(currentYearCo
 });
 
 // After document has been initialized:
-setTimeout(function(){
+setTimeout(function () {
     document.querySelector(`.${starShapeClass}`).style.transition = '2.2s';
 }, 0);
