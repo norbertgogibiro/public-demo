@@ -2,6 +2,10 @@ const openDropdownClass = 'dropdown-state-open';
 const dropdownOpenerClass = 'dropdown-opener';
 const emailLinkClass = 'link-email';
 const currentYearContainerClass = 'current-year';
+const starClass = 'star';
+const starShapeClass = 'star-shape';
+const eyeClass = 'eye';
+const grownStarClass = 'is-grown';
 const cursorFollowerEyeClass = 'eye-ball-cursor-follower';
 const cursorFollowingEyeClass = 'is-following';
 const trippingEyeClass = 'is-tripping';
@@ -55,7 +59,8 @@ const closeAllDropdowns = function () {
         parentClassList.remove(openDropdownClass);
     });
 
-    document.querySelector('.eye').classList.remove(trippingEyeClass);
+    document.querySelector(`.${eyeClass}`).classList.remove(trippingEyeClass);
+    document.querySelector(`.${starClass}`).classList.remove(grownStarClass);
     document.addEventListener('mousemove', setEyeBallPosition);
     isEyeballFollowingLoop = true;
 };
@@ -76,7 +81,8 @@ controlEyeBallFollowing(true);
 
         if (isClickEvent && target.classList.contains(dropdownOpenerClass)) {
             target.parentNode.classList.add(openDropdownClass);
-            document.querySelector('.eye').classList.add(trippingEyeClass);
+            document.querySelector(`.${eyeClass}`).classList.add(trippingEyeClass);
+            document.querySelector(`.${starClass}`).classList.add(grownStarClass);
             document.removeEventListener('mousemove', setEyeBallPosition);
             setEyeBallPosition();
             isEyeballFollowingLoop = false;
@@ -123,3 +129,8 @@ document.querySelectorAll(`.${emailLinkClass}`).forEach(emailLink => {
 document.querySelectorAll(`.${currentYearContainerClass}`).forEach(currentYearContainer => {
     currentYearContainer.innerHTML = new Date().getFullYear();
 });
+
+// After document has been initialized:
+setTimeout(function(){
+    document.querySelector(`.${starShapeClass}`).style.transition = '2.2s';
+}, 0);

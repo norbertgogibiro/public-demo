@@ -1,20 +1,27 @@
-@import './animations';
+@import "./animations";
 
 .star {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(0.4, 0.4);
+  transform: translate(-50%, -50%);
 
   .star-shape {
     position: absolute;
     top: 0;
     left: 0;
+    transform: scale(0.4, 0.4);
 
     path {
       transition: $speed-normal;
       fill: $color-black;
-      animation: star-path 0.7s ease-in-out infinite alternate-reverse;
+      animation: star-path 1.4s ease-in-out infinite alternate-reverse forwards;
+    }
+  }
+
+  &.is-grown {
+    .star-shape {
+      transform: scale(0.6, 0.6);
     }
   }
 }
