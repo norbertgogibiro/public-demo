@@ -21,7 +21,7 @@
 
   &.is-grown {
     .star-shape {
-      transform: scale(0.6, 0.6);
+      transform: rotate(10deg) scale(0.6, 0.65);
     }
   }
 }

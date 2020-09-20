@@ -12,6 +12,10 @@ const trippingEyeClass = 'is-tripping';
 const clickEvents = ['click', 'touchstart'];
 let isEyeballFollowingLoop = true;
 
+const getRandomAmount = function (min, max) {
+    return Math.random() * (max - min) + min;
+}
+
 const setEyeBallPosition = function (event = {}) {
     const { innerWidth, innerHeight } = window;
     const { clientX = innerWidth / 2, clientY = innerHeight / 2 } = event;
@@ -25,14 +29,8 @@ const setEyeBallPosition = function (event = {}) {
 };
 
 const controlEyeBallFollowing = function (followMovement = false) {
-    const passiveTimeMin = 1000;
-    const passiveTimeMax = 3500;
-    const passiveTime = Math.random() * (passiveTimeMax - passiveTimeMin) + passiveTimeMin;
-
-    const activeTimeMin = 4500;
-    const activeTimeMax = 11500;
-    const activeTime = Math.random() * (activeTimeMax - activeTimeMin) + activeTimeMin;
-    console.log('called', isEyeballFollowingLoop);
+    const passiveTime = getRandomAmount(1000, 3500);
+    const activeTime = getRandomAmount(4500, 11500);
 
     setTimeout(() => {
         document.querySelectorAll(`.${cursorFollowerEyeClass}:not(.${trippingEyeClass})`).forEach(eyeBallElement => {
