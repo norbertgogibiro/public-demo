@@ -59,13 +59,16 @@ $size-eyeball: 250px;
 
     .eye-ball-cursor-follower {
       &.is-following {
-        transition: 0s;
+        transition: background-color $speed-eye-blink $speed-eye-blink;
       }
     }
   }
 
   &.is-tripping {
     .eye-ball {
+      background-color: $color-yellow;
+      //transition: top $speed-eye-blink, left $speed-eye-blink, background-color $speed-eye-blink $speed-eye-blink;
+
       & > .eye-inner {
         transition: visibility $speed-eye-blink $speed-eye-blink;
         visibility: visible;
@@ -126,7 +129,7 @@ $size-eyeball: 250px;
   width: $size-eyeball;
   height: $size-eyeball;
   border-radius: 50%;
-  transition: $speed-normal;
+  transition: top $speed-normal, left $speed-eye-blink, background-color $speed-eye-blink $speed-eye-blink;
   transform: translate(-50%, -50%);
   background: $color-blue;
   overflow: hidden;
