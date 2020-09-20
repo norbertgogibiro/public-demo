@@ -2,6 +2,8 @@ const openDropdownClass = 'dropdown-state-open';
 const dropdownOpenerClass = 'dropdown-opener';
 const emailLinkClass = 'link-email';
 const currentYearContainerClass = 'current-year';
+const cursorFollowerEyeClass = 'eye-ball-cursor-follower';
+const cursorFollowingEyeClass = 'is-following';
 const trippingEyeClass = 'is-tripping';
 const clickEvents = ['click', 'touchstart'];
 let isEyeballFollowingLoop = true;
@@ -12,7 +14,7 @@ const setEyeBallPosition = function (event = {}) {
     const percentPositionX = (clientX * 100) / innerWidth;
     const percentPositionY = (clientY * 100) / innerHeight;
 
-    document.querySelectorAll('.eye-ball-cursor-follower').forEach(eyeBallElement => {
+    document.querySelectorAll(`.${cursorFollowerEyeClass}`).forEach(eyeBallElement => {
         eyeBallElement.style.top = `${percentPositionY}%`;
         eyeBallElement.style.left = `${percentPositionX}%`;
     });
@@ -29,13 +31,15 @@ const controlEyeBallFollowing = function (followMovement = false) {
     console.log('called', isEyeballFollowingLoop);
 
     setTimeout(() => {
-        document.querySelectorAll('.eye-ball-cursor-follower').forEach(eyeBallElement => {
+        document.querySelectorAll(`.${cursorFollowerEyeClass}`).forEach(eyeBallElement => {
             if (followMovement) {
                 document.addEventListener('mousemove', setEyeBallPosition);
+                eyeBallElement.classList.add(cursorFollowingEyeClass);
             }
 
             else {
                 document.removeEventListener('mousemove', setEyeBallPosition);
+                eyeBallElement.classList.remove(cursorFollowingEyeClass);
                 setEyeBallPosition();
             }
         });

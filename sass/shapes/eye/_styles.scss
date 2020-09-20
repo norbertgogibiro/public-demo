@@ -12,7 +12,7 @@ $size-eyeball: 250px;
   overflow: hidden;
 
   &:before {
-    content: '';
+    content: "";
     position: absolute;
     top: 50%;
     left: 50%;
@@ -54,6 +54,12 @@ $size-eyeball: 250px;
       path {
         animation: eye-lids-simple-path-sequence-short (60 * $speed-eye-blink)
           ease-in-out $speed-eye-blink infinite alternate;
+      }
+    }
+
+    .eye-ball-cursor-follower {
+      &.is-following {
+          transition: 0s;
       }
     }
   }
