@@ -183,8 +183,9 @@ $size-eyeball: 250px;
 
           &.eye-lids-innermost {
             path {
-              animation: eye-lids-simple-path-close $speed-eye-blink ease-in-out
-                2.7s forwards reverse;
+              animation: eye-lids-simple-path-sequence-short
+              (60 * $speed-eye-blink) ease-in-out 2.7s infinite
+              alternate;
             }
           }
         }
