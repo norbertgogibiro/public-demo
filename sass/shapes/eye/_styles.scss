@@ -1,10 +1,11 @@
 @import "./animations";
 $size-eye-height: 265px;
+$size-eye-clip: 350px;
 $size-eyeball: 250px;
 
 .eye-clip {
   position: absolute;
-  height: 265px;
+  height: $size-eye-clip;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%) scale(0.3, 0.3);
@@ -15,8 +16,8 @@ $size-eyeball: 250px;
     position: absolute;
     top: 50%;
     left: 50%;
-    width: $size-eye-height * 1.2;
-    height: $size-eye-height * 1.2;
+    width: $size-eye-clip;
+    height: $size-eye-clip;
     border-radius: 0 70%;
     transform: translate(-50%, -50%) rotate(-45deg);
     background: $color-yellow;
