@@ -25,17 +25,17 @@ const getShuffledArray = function (inputArray) {
     let { length: counter } = outputArray;
     let temp;
     let index;
-  
+
     while (counter > 0) {
-      index = Math.floor(Math.random() * counter);
-      counter -= 1;
-      temp = outputArray[counter];
-      outputArray[counter] = outputArray[index];
-      outputArray[index] = temp;
+        index = Math.floor(Math.random() * counter);
+        counter -= 1;
+        temp = outputArray[counter];
+        outputArray[counter] = outputArray[index];
+        outputArray[index] = temp;
     }
-  
+
     return outputArray;
-  }
+}
 
 const setEyeBallPosition = function (event = {}) {
     const { innerWidth, innerHeight } = window;
@@ -72,6 +72,32 @@ const controlEyeBallFollowing = function (followMovement = false) {
         }
     }, followMovement ? passiveTime : activeTime);
 };
+
+const makeEyeCry = function () {
+    const starElement = document.querySelector(`.${starClass}`);
+    const tearDropDelayMax = 500;
+    const tearDropDelayOptions = getShuffledArray([0, tearDropDelayMax / 2, tearDropDelayMax]);
+
+    const tearDrops = new Array(3).fill().map((_, index) => {
+        const dropShapeElement = document.getElementById('template-drop').content.cloneNode(true);
+        const rotationAmount = 45 * (index - 1) * -1;
+        const tearDropWrapperElement = document.createElement('div');
+        const tearDropElement = document.createElement('div');
+
+        tearDropElement.className = dropClass;
+        tearDropElement.append(dropShapeElement);
+        tearDropElement.style.animationDelay = `${tearDropDelayOptions[index]}ms`;
+        tearDropElement.addEventListener('animationend', ({ target }) => target.parentNode.remove());
+
+        tearDropWrapperElement.className = dropWrapperClass;
+        tearDropWrapperElement.style.transform = `rotate(${rotationAmount}deg)`;
+        tearDropWrapperElement.append(tearDropElement);
+
+        return tearDropWrapperElement;
+    });
+
+    starElement.prepend(...tearDrops);
+}
 
 const closeAllDropdowns = function () {
     document.querySelectorAll(`.${dropdownOpenerClass}`).forEach(({ parentNode: { classList: parentClassList } }) => {
@@ -113,6 +139,10 @@ controlEyeBallFollowing(true);
             document.removeEventListener('mousemove', setEyeBallPosition);
             setEyeBallPosition();
             isEyeballFollowingLoop = false;
+        }
+
+        else {
+            makeEyeCry();
         }
     });
 
@@ -156,29 +186,7 @@ controlEyeBallFollowing(true);
 
         // Handle clicks on the main eye:
         document.querySelector(`button.${eyeClass}`).addEventListener(eventName, function () {
-            const starElement = document.querySelector(`.${starClass}`);
-            const tearDropDelayMax = 500;
-            const tearDropDelayOptions = getShuffledArray([0, tearDropDelayMax / 2, tearDropDelayMax]);
-
-            const tearDrops = new Array(3).fill().map((_, index) => {
-                const dropShapeElement = document.getElementById('template-drop').content.cloneNode(true);
-                const rotationAmount = 45 * (index - 1) * -1;
-                const tearDropWrapperElement = document.createElement('div');
-                const tearDropElement = document.createElement('div');
-                
-                tearDropElement.className = dropClass;
-                tearDropElement.append(dropShapeElement);
-                tearDropElement.style.animationDelay = `${tearDropDelayOptions[index]}ms`;
-                tearDropElement.addEventListener('animationend', ({ target }) => target.parentNode.remove());
-
-                tearDropWrapperElement.className = dropWrapperClass;
-                tearDropWrapperElement.style.transform = `rotate(${rotationAmount}deg)`;
-                tearDropWrapperElement.append(tearDropElement);
-
-                return tearDropWrapperElement;
-            });
-
-            starElement.prepend(...tearDrops);
+            makeEyeCry();
         });
     }
 });
