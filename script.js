@@ -4,17 +4,38 @@ const emailLinkClass = 'link-email';
 const currentYearContainerClass = 'current-year';
 const starClass = 'star';
 const starShapeClass = 'star-shape';
-const eyeClass = 'eye';
 const grownStarClass = 'is-grown';
+const eyeClass = 'eye';
 const cursorFollowerEyeClass = 'eye-ball-cursor-follower';
 const cursorFollowingEyeClass = 'is-following';
 const trippingEyeClass = 'is-tripping';
+const dropClass = 'drop';
+const dropWrapperClass = 'drop-wrap';
+const dropShapeClass = 'drop-shape';
 const clickEvents = ['click', 'touchstart'];
 let isEyeballFollowingLoop = true;
 
 const getRandomAmount = function (min, max) {
     return Math.random() * (max - min) + min;
 }
+
+const getShuffledArray = function (inputArray) {
+    // https://stackoverflow.com/a/2450976/5125537
+    const outputArray = [...inputArray];
+    let { length: counter } = outputArray;
+    let temp;
+    let index;
+  
+    while (counter > 0) {
+      index = Math.floor(Math.random() * counter);
+      counter -= 1;
+      temp = outputArray[counter];
+      outputArray[counter] = outputArray[index];
+      outputArray[index] = temp;
+    }
+  
+    return outputArray;
+  }
 
 const setEyeBallPosition = function (event = {}) {
     const { innerWidth, innerHeight } = window;
@@ -74,9 +95,9 @@ controlEyeBallFollowing(true);
     document.addEventListener(eventName, function (event) {
         const { target, key, type } = event;
         const hasClickHappened = clickEvents.includes(type)
-    
+
         if (hasClickHappened || (type === 'keyup' && key === 'Escape')) {
-    
+
             // Close all dropdowns when any dropdown is open and
             // the user clicks or presses escape:
             if (document.querySelectorAll(`.${openDropdownClass}`).length > 0) {
@@ -96,7 +117,7 @@ controlEyeBallFollowing(true);
     });
 
     // Only click events:
-    if(isClickEvent){
+    if (isClickEvent) {
 
         // Handle clicks on the dropdown openers:
         document.querySelectorAll(`.${dropdownOpenerClass}`).forEach(dropdownOpener => {
@@ -135,10 +156,31 @@ controlEyeBallFollowing(true);
 
         // Handle clicks on the main eye:
         document.querySelector(`button.${eyeClass}`).addEventListener(eventName, function () {
-            alert();
+            const starElement = document.querySelector(`.${starClass}`);
+            const tearDropDelayMax = 500;
+            const tearDropDelayOptions = getShuffledArray([0, tearDropDelayMax / 2, tearDropDelayMax]);
+
+            const tearDrops = new Array(3).fill().map((_, index) => {
+                const dropShapeElement = document.getElementById('template-drop').content.cloneNode(true);
+                const rotationAmount = 45 * (index - 1) * -1;
+                const tearDropWrapperElement = document.createElement('div');
+                const tearDropElement = document.createElement('div');
+                
+                tearDropElement.className = dropClass;
+                tearDropElement.append(dropShapeElement);
+                tearDropElement.style.animationDelay = `${tearDropDelayOptions[index]}ms`;
+
+                tearDropWrapperElement.className = dropWrapperClass;
+                tearDropWrapperElement.style.transform = `rotate(${rotationAmount}deg)`;
+                tearDropWrapperElement.append(tearDropElement);
+
+                return tearDropWrapperElement;
+            });
+
+            starElement.prepend(...tearDrops);
         });
     }
-}); 
+});
 
 // Populate current year:
 document.querySelectorAll(`.${currentYearContainerClass}`).forEach(currentYearContainer => {

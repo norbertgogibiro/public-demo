@@ -8,7 +8,7 @@ $size-eyeball: 250px;
   height: $size-eye-clip;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(0.3, 0.3);
+  transform: translate(-50%, -50%) scale(0.3);
   overflow: hidden;
 
   &:before {

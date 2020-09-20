@@ -1,0 +1,6 @@
+@keyframes tear-drop {
+  to {
+    top: 100vh;
+    transform: translate(-50%, 50%) scale(3);
+  }
+}
