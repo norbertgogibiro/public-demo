@@ -31,7 +31,7 @@ const controlEyeBallFollowing = function (followMovement = false) {
     console.log('called', isEyeballFollowingLoop);
 
     setTimeout(() => {
-        document.querySelectorAll(`.${cursorFollowerEyeClass}`).forEach(eyeBallElement => {
+        document.querySelectorAll(`.${cursorFollowerEyeClass}:not(.${trippingEyeClass})`).forEach(eyeBallElement => {
             if (followMovement) {
                 document.addEventListener('mousemove', setEyeBallPosition);
                 eyeBallElement.classList.add(cursorFollowingEyeClass);
