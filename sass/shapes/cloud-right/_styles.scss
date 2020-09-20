@@ -15,4 +15,8 @@
       d: path($path-cloud-right-start);
     }
   }
+
+  @include screens-smaller-than(sm) {
+    transform: translate(-50%, -30%) scaleY(-0.8);
+  }
 }

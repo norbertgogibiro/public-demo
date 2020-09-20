@@ -14,6 +14,10 @@ $speed-eye-drops: 1s;
   transform: translate(-50%, -50%) scale(0.5);
   animation: tear-drop $speed-eye-drops ease-in 0s 1 normal forwards;
 
+  @include screens-smaller-than(sm) {
+    transform: translate(-50%, -50%) scale(0.2);
+  }
+
   .drop-shape {
     path {
       fill: $color-blue;

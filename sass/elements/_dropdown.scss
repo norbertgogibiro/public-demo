@@ -16,36 +16,53 @@ $dropdown-z-index: $level-layer-top;
     color: $color-yellow;
     border-top: $width-border-line solid $color-yellow;
     z-index: $dropdown-z-index;
+
+    @include screens-smaller-than(sm) {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      transform: none;
+    }
   }
 
   &.dropdown-state-open {
     .dropdown-opener {
-      &:before {
-        content: "";
-        position: absolute;
-        top: calc(100% - #{$triangle-size} - #{$width-border-line / 2});
-        left: 50%;
-        width: 0;
-        height: 0;
-        border-left: calc(#{$triangle-size} + #{$width-border-line}) solid transparent;
-        border-right: calc(#{$triangle-size} + #{$width-border-line}) solid transparent;
-        border-bottom: calc(#{$triangle-size} + #{$width-border-line}) solid $color-yellow;
-        transform: translateX(-50%);
-        z-index: $dropdown-z-index - 1;
-      }
+      transform: scale($size-focus-scale);
 
-      &:after {
-        content: "";
-        position: absolute;
-        top: calc(100% - #{$triangle-size} + #{$width-border-line});
-        left: 50%;
-        width: 0;
-        height: 0;
-        border-left: $triangle-size solid transparent;
-        border-right: $triangle-size solid transparent;
-        border-bottom: $triangle-size solid $color-black;
-        transform: translateX(-50%);
-        z-index: $dropdown-z-index + 1;
+      @include screens-bigger-than(sm) {
+        transform: none;
+
+        &:before {
+          content: "";
+          position: absolute;
+          top: calc(100% - #{$triangle-size} - #{$width-border-line / 2});
+          left: 50%;
+          width: 0;
+          height: 0;
+          border-left: calc(#{$triangle-size} + #{$width-border-line}) solid
+            transparent;
+          border-right: calc(#{$triangle-size} + #{$width-border-line}) solid
+            transparent;
+          border-bottom: calc(#{$triangle-size} + #{$width-border-line}) solid
+            $color-yellow;
+          transform: translateX(-50%);
+          z-index: $dropdown-z-index - 1;
+        }
+
+        &:after {
+          content: "";
+          position: absolute;
+          top: calc(100% - #{$triangle-size} + #{$width-border-line});
+          left: 50%;
+          width: 0;
+          height: 0;
+          border-left: $triangle-size solid transparent;
+          border-right: $triangle-size solid transparent;
+          border-bottom: $triangle-size solid $color-black;
+          transform: translateX(-50%);
+          z-index: $dropdown-z-index + 1;
+        }
       }
     }
 

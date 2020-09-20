@@ -17,11 +17,19 @@
       fill: $color-black;
       animation: star-path 1.4s ease-in-out infinite alternate-reverse forwards;
     }
+
+    @include screens-smaller-than(sm) {
+      transform: scale(0.2);
+    }
   }
 
   &.is-grown {
     .star-shape {
       transform: rotate(10deg) scale(0.6, 0.65);
+
+      @include screens-smaller-than(sm) {
+        transform: rotate(10deg) scale(0.25, 0.275);
+      }
     }
   }
 }

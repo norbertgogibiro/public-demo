@@ -100,8 +100,8 @@ const makeEyeCry = function () {
 }
 
 const closeAllDropdowns = function () {
-    document.querySelectorAll(`.${dropdownOpenerClass}`).forEach(({ parentNode: { classList: parentClassList } }) => {
-        parentClassList.remove(openDropdownClass);
+    document.querySelectorAll(`.${dropdownOpenerClass}`).forEach(dropdownOpenerElement => {
+        dropdownOpenerElement.parentNode.classList.remove(openDropdownClass);
     });
 
     document.querySelector(`.${eyeClass}`).classList.remove(trippingEyeClass);

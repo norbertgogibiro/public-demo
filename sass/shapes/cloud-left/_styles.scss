@@ -1,5 +1,4 @@
-
-@import './animations';
+@import "./animations";
 
 .cloud-left {
   position: absolute;
@@ -13,5 +12,9 @@
       fill: $color-yellow;
       animation: cloud-left-shape-path 2s ease-in-out infinite alternate-reverse;
     }
+  }
+
+  @include screens-smaller-than(sm) {
+    transform: translate(-10%, -70%) scale(0.8, -0.8);
   }
 }

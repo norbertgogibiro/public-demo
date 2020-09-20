@@ -14,9 +14,14 @@ header {
   top: $margin-screen-edge-vertical;
   left: $margin-screen-edge-horizontal;
   right: $margin-screen-edge-horizontal;
-  padding: 3em;
+  padding: $size-margin-header;
   font-size: 18px;
   z-index: $level-layer-high;
+
+  @include screens-smaller-than(md) {
+    text-align: center;
+    padding: 1em;
+  }
 }
 
 main {
@@ -40,6 +45,14 @@ footer {
     max-width: 25em;
     padding: 0 $margin-screen-edge-horizontal;
     font-size: $size-letter-small;
+
+    @include screens-smaller-than(md) {
+      font-size: $size-letter-smallest;
+    }
+  }
+
+  @include screens-smaller-than(md) {
+    text-align: center;
   }
 }
 

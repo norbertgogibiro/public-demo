@@ -18,6 +18,8 @@ $speed-eye-blink: 0.2s;
 $size-letter-normal: 15px;
 $size-letter-big: $size-letter-normal * 1.4;
 $size-letter-small: $size-letter-normal * 0.7;
+$size-letter-smallest: $size-letter-normal * 0.5;
+$size-margin-header: 45px;
 $size-focus-scale: 1.05;
 
 // SPACING:
@@ -32,3 +34,12 @@ $level-layer-high: 75;
 $level-layer-middle: 50;
 $level-layer-low: 25;
 $level-layer-bottom: 0;
+
+// BREAKPOINTS:
+$breakpoints: (
+  xs: 0,
+  sm: 576px,
+  md: 768px,
+  lg: 992px,
+  xl: 1200px,
+) !default;

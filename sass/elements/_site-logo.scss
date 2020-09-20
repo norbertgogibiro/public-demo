@@ -8,4 +8,9 @@
   &:focus {
     transform: scale($size-focus-scale);
   }
+
+  @include screens-smaller-than(sm) {
+    position: relative;
+    margin-bottom: $size-margin-header;
+  }
 }

@@ -3,16 +3,11 @@
   width: 100%;
   max-width: 50em;
   margin: auto;
-  justify-content: space-between;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
   font-size: $size-letter-big;
 
   li {
-    button {
-      &:focus {
-        //transform: scale($size-focus-scale);
-      }
-    }
-
     &:nth-child(odd) {
       button {
         color: $color-black;
@@ -35,18 +30,20 @@
       }
     }
 
-    &:first-child {
-      .dropdown {
-        left: 0;
-        transform: none;
+    @include screens-bigger-than(sm) {
+      &:first-child {
+        .dropdown {
+          left: 0;
+          transform: none;
+        }
       }
-    }
 
-    &:last-child {
-      .dropdown {
-        left: unset;
-        right: 0;
-        transform: none;
+      &:last-child {
+        .dropdown {
+          left: unset;
+          right: 0;
+          transform: none;
+        }
       }
     }
   }
@@ -82,5 +79,12 @@
         color: $color-orange;
       }
     }
+  }
+
+  @include screens-smaller-than(sm) {
+    position: fixed;
+    bottom: $size-margin-header * 2;
+    left: 0;
+    font-size: $size-letter-normal;
   }
 }
