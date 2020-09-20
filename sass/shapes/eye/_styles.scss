@@ -41,6 +41,12 @@ $size-eyeball: 250px;
     border-radius: 50%;
   }
 
+  &:focus {
+    .eye-ball {
+      transform: translate(-50%,-50%) scale(1.3);
+    }
+  }
+
   &:hover {
     .eye-lids-simple {
       path {

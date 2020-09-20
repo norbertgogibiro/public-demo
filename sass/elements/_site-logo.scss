@@ -4,4 +4,8 @@
   left: 0;
   width: 10em;
   height: 10em;
+
+  &:focus {
+    transform: scale($size-focus-scale);
+  }
 }

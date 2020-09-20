@@ -7,6 +7,12 @@
   font-size: $size-letter-big;
 
   li {
+    button {
+      &:focus {
+        transform: scale($size-focus-scale);
+      }
+    }
+
     &:nth-child(odd) {
       button {
         color: $color-black;
