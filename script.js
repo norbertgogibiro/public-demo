@@ -108,6 +108,12 @@ const closeAllDropdowns = function () {
     document.querySelector(`.${starClass}`).classList.remove(grownStarClass);
     document.addEventListener('mousemove', setEyeBallPosition);
     isEyeballFollowingLoop = true;
+
+    setTimeout(function () {
+        if (!document.querySelector(`.${grownStarClass}`)) {
+            makeEyeCry();
+        }
+    }, 0);
 };
 
 // Make the eyeball follow the cursor:
@@ -139,10 +145,6 @@ controlEyeBallFollowing(true);
             document.removeEventListener('mousemove', setEyeBallPosition);
             setEyeBallPosition();
             isEyeballFollowingLoop = false;
-        }
-
-        else {
-            makeEyeCry();
         }
     });
 
