@@ -59,7 +59,7 @@ $size-eyeball: 250px;
 
     .eye-ball-cursor-follower {
       &.is-following {
-          transition: 0s;
+        transition: 0s;
       }
     }
   }
@@ -69,6 +69,13 @@ $size-eyeball: 250px;
       & > .eye-inner {
         transition: visibility $speed-eye-blink $speed-eye-blink;
         visibility: visible;
+
+        .eye-lids-simple,
+        .eye-lids-cross { 
+          path {
+            animation-play-state: running;
+          }
+        }
       }
     }
 
@@ -142,6 +149,7 @@ $size-eyeball: 250px;
           fill: $color-orange;
           animation: eye-lids-simple-path-sequence-short (60 * $speed-eye-blink)
             ease-in-out 0.5s infinite alternate-reverse;
+          animation-play-state: paused;
         }
       }
 
@@ -174,7 +182,7 @@ $size-eyeball: 250px;
           &.eye-lids-innermost {
             path {
               animation: eye-lids-simple-path-close $speed-eye-blink ease-in-out
-                0.7s forwards reverse;
+                2.7s forwards reverse;
             }
           }
         }
@@ -192,7 +200,7 @@ $size-eyeball: 250px;
         path {
           fill: $color-yellow;
           d: path($path-eyeLids-simple-open);
-          animation: none;
+          animation: none; // should never animate, it is fixed
         }
       }
 
@@ -204,6 +212,7 @@ $size-eyeball: 250px;
           d: path($path-eyeLids-cross-close);
           animation: eye-lids-cross-path-sequence-short (60 * $speed-eye-blink)
             ease-in-out 0.5s infinite alternate-reverse;
+          animation-play-state: paused;
         }
       }
     }
