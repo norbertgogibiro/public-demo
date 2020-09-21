@@ -1,3 +1,4 @@
+const logoClass = 'site-logo';
 const openDropdownClass = 'dropdown-state-open';
 const dropdownOpenerClass = 'dropdown-opener';
 const emailLinkClass = 'link-email';
@@ -126,6 +127,7 @@ const setTheme = function () {
         poison: 2
     };
 
+    const themeNameClassPrefix = 'theme';
     const defaultThemeName = 'orange';
     const minAllowedProbability = 0;
     const maxAllowedProbability = 100;
@@ -150,12 +152,14 @@ const setTheme = function () {
         themeOptions.pop();
 
         Object.entries(themeProbability).forEach(({ 0: themeName, 1: probability }) => {
-            themeOptions.push(...new Array(probability).fill(themeName));
+            if(document.querySelector('body').className !== `${themeNameClassPrefix}-${themeName}`) {
+                themeOptions.push(...new Array(probability).fill(themeName));
+            }
         });
     }
 
     const randomlySelectedThemeIndex = Math.round(getRandomAmount(0, themeOptions.length - 1));
-    document.getElementsByTagName('body')[0].classList.add(`theme-${themeOptions[randomlySelectedThemeIndex]}`);
+    document.querySelector('body').className = `${themeNameClassPrefix}-${themeOptions[randomlySelectedThemeIndex]}`;
 }
 
 setTheme();
@@ -194,6 +198,12 @@ controlEyeBallFollowing(true);
 
     // Only click events:
     if (isClickEvent) {
+
+        // Handle clicks on the site logo:
+        document.querySelector(`button.${logoClass}`).addEventListener(eventName, function () {
+            setTheme();
+            makeEyeCry();
+        });
 
         // Handle clicks on the dropdown openers:
         document.querySelectorAll(`.${dropdownOpenerClass}`).forEach(dropdownOpener => {
