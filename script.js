@@ -162,7 +162,7 @@ const setTheme = function () {
     document.querySelector('body').className = `${themeNameClassPrefix}-${themeOptions[randomlySelectedThemeIndex]}`;
 }
 
-setTheme();
+//setTheme();
 
 // Make the eyeball follow the cursor:
 controlEyeBallFollowing(true);

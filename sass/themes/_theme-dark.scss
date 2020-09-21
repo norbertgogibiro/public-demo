@@ -6,6 +6,8 @@
   filter: grayscale(1);
 
   // ELEMENTS:
+  $logo-desktop: $color-blue;
+  $logo-mobile: $color-orange;
   $background: $color-blue;
   $link-general: $color-orange;
   $link-email: $color-blue;
@@ -103,6 +105,15 @@
         &:hover {
           color: $dropdown-link-general-hover;
         }
+      }
+    }
+  }
+  .site-logo {
+    path {
+      fill: $logo-desktop;
+
+      @include screens-smaller-than(sm) {
+        fill: $logo-mobile;
       }
     }
   }

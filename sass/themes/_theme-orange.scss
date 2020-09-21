@@ -5,6 +5,8 @@
    *************************************************/
 
   // ELEMENTS:
+  $logo-desktop: $color-black;
+  $logo-mobile: $color-black;
   $background: $color-orange;
   $link-general: $color-yellow;
   $link-email: $color-orange;
@@ -102,6 +104,15 @@
         &:hover {
           color: $dropdown-link-general-hover;
         }
+      }
+    }
+  }
+  .site-logo {
+    path {
+      fill: $logo-desktop;
+
+      @include screens-smaller-than(sm) {
+        fill: $logo-mobile;
       }
     }
   }
