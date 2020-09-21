@@ -15,6 +15,7 @@ $dropdown-z-index: $level-layer-top;
     border-top-width: $width-border-line;
     border-top-style: solid;
     z-index: $dropdown-z-index;
+    text-align: left;
 
     @include screens-smaller-than(sm) {
       position: fixed;
