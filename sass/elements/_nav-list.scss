@@ -7,12 +7,12 @@
   justify-content: space-evenly;
   font-size: $size-letter-big;
 
-  li {
+  & > li {
     width: 25%;
     text-align: center;
 
     button {
-      width:100%;
+      width: 100%;
       border-top: unset;
       border-left: unset;
       border-right: unset;
