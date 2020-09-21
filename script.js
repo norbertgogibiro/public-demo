@@ -116,6 +116,50 @@ const closeAllDropdowns = function () {
     }, 0);
 };
 
+const setTheme = function () {
+    const themeProbability = {
+        orange: 60,
+        yellow: 10,
+        blue: 10,
+        night: 5,
+        dark: 5,
+        poison: 2
+    };
+
+    const defaultThemeName = 'orange';
+    const minAllowedProbability = 0;
+    const maxAllowedProbability = 100;
+    const themeOptions = [defaultThemeName];
+    const themeProbabilityValues = Object.values(themeProbability);
+
+    const allValuesValid = themeProbabilityValues.every(val => {
+        const isWholeNumber = Number.isInteger(val);
+        const isValid = isWholeNumber && (val > minAllowedProbability - 1) && (val < maxAllowedProbability + 1);
+
+        if (!isValid) {
+            console.error(
+                `ERROR: invalid theme probability value "${val}" - 
+                it has to be a whole number between ${minAllowedProbability} and ${maxAllowedProbability}`
+            )
+        }
+
+        return isValid;
+    });
+
+    if (allValuesValid) {
+        themeOptions.pop();
+
+        Object.entries(themeProbability).forEach(({ 0: themeName, 1: probability }) => {
+            themeOptions.push(...new Array(probability).fill(themeName));
+        });
+    }
+
+    const randomlySelectedThemeIndex = Math.round(getRandomAmount(0, themeOptions.length - 1));
+    document.getElementsByTagName('body')[0].classList.add(`theme-${themeOptions[randomlySelectedThemeIndex]}`);
+}
+
+setTheme();
+
 // Make the eyeball follow the cursor:
 controlEyeBallFollowing(true);
 
