@@ -33,6 +33,12 @@ $dropdown-z-index: $level-layer-top;
       @include screens-bigger-than(sm) {
         transform: none;
 
+        &:focus,
+        &:hover {
+          border-width: 0;
+          margin-bottom: $width-border-line;
+        }
+
         &:before {
           content: "";
           position: absolute;
