@@ -23,7 +23,6 @@
   $eye-white-outermost: $color-yellow;
   $eye-white-middle-vertical: $color-yellow;
   $eye-white-middle-horizontal: $color-yellow;
-  $eye-white-innermost: $color-yellow;
   $eye-ball-outermost-normal: $color-blue;
   $eye-ball-outermost-tripping: $color-blue;
   $eye-ball-middle-outer: $color-orange;
@@ -132,14 +131,6 @@
   .eye-clip {
     &:before {
       background: $eye-white-outermost;
-    }
-
-    .eye {
-      &.is-tripping {
-        .eye-ball {
-          background-color: $eye-white-innermost;
-        }
-      }
     }
 
     .eye-lids-simple {
