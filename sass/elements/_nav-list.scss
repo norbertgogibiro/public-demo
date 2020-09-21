@@ -8,7 +8,11 @@
   font-size: $size-letter-big;
 
   li {
+    width: 25%;
+    text-align: center;
+
     button {
+      width:100%;
       border-top: unset;
       border-left: unset;
       border-right: unset;
@@ -17,6 +21,8 @@
     }
 
     @include screens-bigger-than(sm) {
+      width: unset;
+
       &:first-child {
         .dropdown {
           left: 0;
