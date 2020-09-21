@@ -8,26 +8,12 @@
   font-size: $size-letter-big;
 
   li {
-    &:nth-child(odd) {
-      button {
-        color: $color-black;
-
-        &:focus,
-        &:hover {
-          border-bottom: $width-border-line solid $color-yellow;
-        }
-      }
-    }
-
-    &:nth-child(even) {
-      button {
-        color: $color-yellow;
-
-        &:focus,
-        &:hover {
-          border-bottom: $width-border-line solid $color-black;
-        }
-      }
+    button {
+      border-top: unset;
+      border-left: unset;
+      border-right: unset;
+      border-bottom-width: $width-border-line;
+      border-bottom-style: solid;
     }
 
     @include screens-bigger-than(sm) {
@@ -70,13 +56,7 @@
       &,
       &:active,
       &:visited {
-        color: $color-yellow;
         text-decoration: none;
-      }
-
-      &:focus,
-      &:hover {
-        color: $color-orange;
       }
     }
   }

@@ -17,10 +17,4 @@ $speed-eye-drops: 1s;
   @include screens-smaller-than(sm) {
     transform: translate(-50%, -50%) scale(0.2);
   }
-
-  .drop-shape {
-    path {
-      fill: $color-blue;
-    }
-  }
 }

@@ -1,20 +1,20 @@
 .link-email {
   &,
-    &:active,
-    &:visited {
-      color: $color-orange;
-    }
+  &:active,
+  &:visited {
+    color: $color-orange;
+  }
 
-    &:focus,
-    &:hover {
-      text-decoration: none;
-    }
+  &:focus,
+  &:hover {
+    text-decoration: none;
+  }
 
   &:before {
     content: attr(data-name) "@";
   }
 
   &:after {
-    content: attr(data-domain) "." attr(data-tld); 
+    content: attr(data-domain) "." attr(data-tld);
   }
 }

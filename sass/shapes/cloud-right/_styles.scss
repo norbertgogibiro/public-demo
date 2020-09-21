@@ -10,7 +10,6 @@
   .cloud-right-shape {
     path {
       transition: $speed-normal;
-      fill: $color-yellow;
       animation: cloud-right-shape-path 3s ease-in-out infinite alternate;
       d: path($path-cloud-right-start);
     }
