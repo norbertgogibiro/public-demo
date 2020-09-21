@@ -1,0 +1,206 @@
+.theme-blue {
+  /*************************************************
+                 -- COLOR SETTINGS --
+   feel free to configure using color variable names
+   *************************************************/
+
+  // ELEMENTS:
+  $background: $color-blue;
+  $link-general: $color-orange;
+  $link-email: $color-orange;
+  $dropdown-background: $color-black;
+  $dropdown-text: $color-yellow;
+  $dropdown-link-general: $color-yellow;
+  $dropdown-link-general-hover: $color-orange;
+  $dropdown-border: $color-yellow;
+  $menu-item-normal: $color-black;
+  $menu-item-alternative: $color-orange;
+
+  // SHAPES:
+  $cloud-left: $color-black;
+  $cloud-right: $color-black;
+  $drop: $color-orange;
+  $eye-white-outermost: $color-yellow;
+  $eye-white-middle-vertical: $color-yellow;
+  $eye-white-middle-horizontal: $color-yellow;
+  $eye-white-innermost: $color-yellow;
+  $eye-ball-outermost-normal: $color-orange;
+  $eye-ball-outermost-tripping: $color-orange;
+  $eye-ball-middle-outer: $color-blue;
+  $eye-ball-middle-inner: $color-black;
+  $eye-ball-innermost: $color-orange;
+  $star: $color-black;
+
+  /*************************************************
+                 -- APPLYING COLORS --
+                 DO NOT TOUCH THESE!!!
+   *************************************************/
+  // ELEMENTS:
+  a {
+    &,
+    &:active,
+    &:visited {
+      color: $link-general;
+    }
+  }
+  .canvas {
+    background: $background;
+  }
+  .dropdown {
+    background: $dropdown-background;
+    color: $dropdown-text;
+    border-color: $dropdown-border;
+  }
+  .dropdown-opener {
+    &:before {
+      border-bottom-color: $dropdown-border;
+    }
+    &:after {
+      border-bottom-color: $dropdown-background;
+    }
+  }
+  .link-email {
+    &,
+    &:active,
+    &:visited {
+      color: $link-email;
+    }
+  }
+  .nav-list {
+    li {
+      &:nth-child(odd) {
+        button {
+          color: $menu-item-normal;
+
+          &:focus,
+          &:hover {
+            border-color: $menu-item-alternative;
+          }
+        }
+      }
+
+      &:nth-child(even) {
+        button {
+          color: $menu-item-alternative;
+
+          &:focus,
+          &:hover {
+            border-color: $menu-item-normal;
+          }
+        }
+      }
+    }
+
+    a {
+      &:not(.link-email) {
+        &,
+        &:active,
+        &:visited {
+          color: $dropdown-link-general;
+        }
+
+        &:focus,
+        &:hover {
+          color: $dropdown-link-general-hover;
+        }
+      }
+    }
+  }
+
+  // SHAPES:
+  .cloud-left {
+    .cloud-left-shape {
+      path {
+        fill: $cloud-left;
+      }
+    }
+  }
+  .cloud-right {
+    .cloud-right-shape {
+      path {
+        fill: $cloud-right;
+      }
+    }
+  }
+  .drop {
+    .drop-shape {
+      path {
+        fill: $drop;
+      }
+    }
+  }
+  .eye-clip {
+    &:before {
+      background: $eye-white-outermost;
+    }
+
+    .eye {
+      &.is-tripping {
+        .eye-ball {
+          background-color: $eye-white-innermost;
+        }
+      }
+    }
+
+    .eye-lids-simple {
+      path {
+        fill: $star;
+      }
+    }
+
+    .eye-ball {
+      background: $eye-ball-outermost-normal;
+
+      & > .eye-inner {
+        .eye-ball {
+          & > .eye-lids-simple {
+            path {
+              fill: $eye-ball-middle-outer;
+            }
+          }
+          
+
+          & > .eye {
+            .eye-ball {
+              &.eye-ball-innermost {
+                background: $eye-ball-innermost;
+              }
+            }
+
+            .eye-lids-simple {
+              &.eye-lids-innermost {
+                path {
+                  fill: $eye-ball-middle-inner;
+                }
+              }
+            }
+          }
+        }
+
+        & > .eye-lids {
+          &.eye-lids-simple {
+            path {
+              fill: $eye-white-middle-horizontal;
+            }
+          }
+          &.eye-lids-cross {
+            path {
+              fill: $eye-ball-outermost-tripping;
+            }
+          }
+        }
+      }
+
+      & > .eye {
+        background: $eye-white-middle-vertical;
+      }
+    }
+  }
+  .star {
+    .star-shape {
+      path {
+        fill: $star;
+      }
+    }
+  }
+}
