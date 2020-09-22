@@ -6,7 +6,8 @@ $dropdown-z-index: $level-layer-top;
 
   .dropdown {
     position: absolute;
-    display: none;
+    visibility: hidden;
+    opacity: 0;
     top: calc(100% - #{$width-border-line});
     left: 50%;
     padding: 1em;
@@ -24,6 +25,7 @@ $dropdown-z-index: $level-layer-top;
       right: 0;
       transform: none;
       text-align: center;
+      transition: $speed-normal;
     }
   }
 
@@ -69,7 +71,12 @@ $dropdown-z-index: $level-layer-top;
     }
 
     .dropdown {
-      display: block;
+      visibility: visible;
+      opacity: 1;
+
+      @include screens-smaller-than(sm) {
+        transition: 0s;
+      }
     }
   }
 }
