@@ -21,8 +21,6 @@
     }
 
     @include screens-bigger-than(sm) {
-      width: unset;
-
       &:first-child {
         .dropdown {
           left: 0;
@@ -37,6 +35,10 @@
           transform: none;
         }
       }
+    }
+
+    @include screens-bigger-than(lg) {
+      width: unset;
     }
   }
 
