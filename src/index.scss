@@ -1,0 +1,7 @@
+@use "./styles/functions" as *;
+
+@each $grayscale-theme-name in get-grayscale-theme-names() {
+  .#{$grayscale-theme-name} {
+    filter: grayscale(1);
+  }
+}

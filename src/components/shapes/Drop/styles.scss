@@ -1,0 +1,17 @@
+@use "../../../styles/functions.scss" as *;
+
+.drop-shape {
+  path {
+    fill: red;
+  }
+}
+
+@each $theme-name in get-theme-names() {
+  .#{$theme-name} {
+    .drop-shape {
+      path {
+        fill: get-color($theme-name, "drop");
+      }
+    }
+  }
+}
