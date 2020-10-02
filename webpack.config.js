@@ -59,6 +59,10 @@ module.exports = env => {
           loader: 'url-loader?limit=10000&name=img/[name].[ext]'
         },
         {
+          test: /\.(woff|woff2|eot|ttf|otf)$/,
+          loader: 'file-loader'
+        },
+        {
           test: /\.svg$/,
           use: [
             {
