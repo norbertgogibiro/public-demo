@@ -1,7 +1,6 @@
 import React from 'react';
 import './styles.scss';
-import { LinkUrl, LinkEmail, Dropdown } from '../../elements';
-import { SiteLogo } from '../../shapes';
+import { LinkUrl, LinkEmail, Dropdown, SiteLogo } from '../../elements';
 
 const navMenuItems = {
 	Music: [
