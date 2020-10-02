@@ -4,12 +4,13 @@ import { AppContext } from '../../misc';
 import './styles.scss';
 
 const SiteLogo = () => {
-	const { setThemeName } = useContext(AppContext);
+	const { switchTheme } = useContext(AppContext);
+
 	return (
-		<button className="site-logo" onClick={() => setThemeName('dark')}>
+		<button className="site-logo" onClick={switchTheme}>
 			<Shape />
 		</button>
 	);
-}
+};
 
 export default SiteLogo;
