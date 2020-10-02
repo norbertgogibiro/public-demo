@@ -1,16 +1,15 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import Drop from './components/shapes/Drop';
+import React from 'react';
+import ReactDOM from 'react-dom';
 import './utils/faviconLoader';
 import './index.scss';
+import {Header, Main, Footer} from './components/layout';
 
 const App = () => {
-  return (
-    <div>
-      <div>Welcome to my-webpack-react-starter</div>
-      <Drop/>
-    </div>
-  );
+	return (
+		<React.Fragment>
+
+		</React.Fragment>
+	);
 };
 
-ReactDOM.render(<App />, document.querySelector("#root"));
+ReactDOM.render(<App />, document.querySelector('#root'));
