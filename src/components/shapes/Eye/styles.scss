@@ -1,0 +1,225 @@
+@use "../../../styles/functions" as *;
+@use "../../../styles/mixins" as *;
+
+$-size-eye-height: 265px;
+$-size-eye-clip: 350px;
+$-size-eyeball: 250px;
+
+.eye-clip {
+  position: absolute;
+  height: $-size-eye-clip;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.3);
+  overflow: hidden;
+
+  @include screens-smaller-than(sm) {
+    transform: translate(-50%, -50%) scale(0.15);
+  }
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: $-size-eye-clip;
+    height: $-size-eye-clip;
+    border-radius: 0 70%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+
+  .eye {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+  
+    &:after {
+      content: "";
+      position: absolute;
+      top: $margin-eye-hoverArea * -1;
+      bottom: $margin-eye-hoverArea * -1;
+      left: $margin-eye-hoverArea * -1;
+      right: $margin-eye-hoverArea * -1;
+      border-radius: 50%;
+    }
+  
+    &:focus {
+      .eye-ball {
+        transform: translate(-50%, -50%) scale(1.3);
+      }
+    }
+  
+    &:hover {
+      .eye-lids-simple {
+        path {
+          animation: eye-lids-simple-path-close 0.05s ease-in-out;
+        }
+      }
+    }
+  
+    &:not(:hover):not(.is-tripping) {
+      .eye-lids-simple {
+        path {
+          animation: eye-lids-simple-path-sequence-long (60 * $speed-eye-blink)
+            ease-in-out $speed-eye-blink infinite alternate;
+        }
+      }
+  
+      .eye-ball-cursor-follower {
+        &.is-following {
+          transition: background-color $speed-eye-blink $speed-eye-blink;
+        }
+      }
+    }
+  
+    &.is-tripping {
+      .eye-ball {
+        & > .eye-inner {
+          transition: visibility $speed-eye-blink $speed-eye-blink;
+          visibility: visible;
+  
+          .eye-lids-simple,
+          .eye-lids-cross {
+            path {
+              animation-play-state: running;
+            }
+          }
+        }
+      }
+  
+      .eye-lids-simple {
+        path {
+          animation: eye-lids-simple-path-close $speed-eye-blink ease-in-out 0s 2
+            forwards alternate;
+        }
+      }
+    }
+  }
+  
+  .eye-lids-simple {
+    position: absolute;
+    top: 0;
+    left: 0;
+  
+    path {
+      transition: $speed-normal;
+      d: path($path-eyeLids-simple-close);
+    }
+  }
+  
+  .eye-ball-clip {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: calc(100% - #{$width-border-line});
+    height: calc(#{$-size-eye-height} - #{$width-border-line});
+    overflow: hidden;
+    transform: translate(-50%, -50%);
+  }
+  
+  .eye-ball-boundary {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 70%;
+    height: 70%;
+    transform: translate(-50%, -50%);
+  }
+  
+  .eye-ball {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: $-size-eyeball;
+    height: $-size-eyeball;
+    border-radius: 50%;
+    transition: top $speed-normal, left $speed-eye-blink,
+      background-color $speed-eye-blink $speed-eye-blink;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+  
+    & > .eye-inner {
+      visibility: hidden;
+      width: 100%;
+      height: 100%;
+  
+      .eye-ball {
+        width: $-size-eyeball * 0.7;
+        height: $-size-eyeball * 0.7;
+  
+        & > .eye-lids-simple {
+          transform: translate(-50%, -50%) scale(0.5);
+          top: 50%;
+          left: 50%;
+  
+          path {
+            animation: eye-lids-simple-path-sequence-short (60 * $speed-eye-blink)
+              ease-in-out 0.5s infinite alternate-reverse;
+            animation-play-state: paused;
+          }
+        }
+  
+        & > .eye {
+          transform: translate(-50%, -50%) scale(0.27);
+          top: 50%;
+          left: 50%;
+          overflow: hidden;
+  
+          .eye-ball {
+            width: $-size-eyeball * 1.1;
+            height: $-size-eyeball * 1.1;
+          }
+  
+          .eye-lids-simple {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+  
+            path {
+              animation: eye-lids-simple-path-sequence-short
+                (60 * $speed-eye-blink) ease-in-out 0.5s infinite
+                alternate-reverse;
+            }
+  
+            &.eye-lids-innermost {
+              path {
+                animation: eye-lids-simple-path-sequence-short
+                  (60 * $speed-eye-blink) ease-in-out 2.7s infinite alternate;
+              }
+            }
+          }
+        }
+      }
+  
+      & > .eye-lids {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+  
+        &.eye-lids-simple {
+          transform: translate(-50%, -50%) scale(0.5) rotate(90deg);
+  
+          path {
+            d: path($path-eyeLids-simple-open);
+            animation: none; // should never animate, it is fixed
+          }
+        }
+  
+        &.eye-lids-cross {
+          transform: translate(-50%, -50%) scale(0.5);
+  
+          path {
+            fill: $color-blue;
+            d: path($path-eyeLids-cross-close);
+            animation: eye-lids-cross-path-sequence-short (60 * $speed-eye-blink)
+              ease-in-out 0.5s infinite alternate-reverse;
+            animation-play-state: paused;
+          }
+        }
+      }
+    }
+  }  
+}

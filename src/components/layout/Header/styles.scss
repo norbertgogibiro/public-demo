@@ -1,0 +1,96 @@
+@use '../../../styles/settings' as *;
+@use '../../../styles/mixins' as *;
+
+header {
+  position: absolute;
+  top: $margin-screen-edge-vertical;
+  left: $margin-screen-edge-horizontal;
+  right: $margin-screen-edge-horizontal;
+  padding: $size-margin-header;
+  font-size: 18px;
+  z-index: $level-layer-high;
+
+  @include screens-smaller-than(md) {
+    text-align: center;
+    padding: 1em;
+  }
+}
+
+.nav-list {
+  display: flex;
+  width: 100%;
+  max-width: 50em;
+  margin: auto;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  font-size: $size-letter-big;
+
+  & > li {
+    width: 25%;
+    text-align: center;
+
+    button {
+      width: 100%;
+      border-top: unset;
+      border-left: unset;
+      border-right: unset;
+      border-bottom-width: $width-border-line;
+      border-bottom-style: solid;
+    }
+
+    @include screens-bigger-than(sm) {
+      &:first-child {
+        .dropdown {
+          left: 0;
+          transform: none;
+        }
+      }
+
+      &:last-child {
+        .dropdown {
+          left: unset;
+          right: 0;
+          transform: none;
+        }
+      }
+    }
+
+    @include screens-bigger-than(lg) {
+      width: unset;
+    }
+  }
+
+  dt {
+    &:not(:first-of-type) {
+      margin-top: 1em;
+    }
+  }
+
+  dd {
+    margin: 0;
+  }
+
+  details {
+    width: 100%;
+  }
+
+  a {
+    &:not(.link-email) {
+      display: block;
+      padding: 0.5em;
+
+      &,
+      &:active,
+      &:visited {
+        text-decoration: none;
+      }
+    }
+  }
+
+  @include screens-smaller-than(sm) {
+    position: fixed;
+    bottom: $size-margin-header * 2;
+    left: 0;
+    font-size: $size-letter-normal;
+  }
+}

@@ -1,0 +1,34 @@
+@use '../../../styles/settings' as *;
+@use "../../../styles/functions" as *;
+@use '../../../styles/mixins' as *;
+
+.site-logo {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 10em;
+  height: 10em;
+
+  &:focus {
+    transform: scale($size-focus-scale);
+  }
+
+  @include screens-smaller-than(sm) {
+    position: relative;
+  }
+}
+
+// THEME-DEPENDENT COLORING:
+@each $theme-name in get-theme-names() {
+  .#{$theme-name} {
+    .site-logo {
+      path {
+        fill: get-color($theme-name, "logo-desktop");
+
+        @include screens-smaller-than(sm) {
+          fill: get-color($theme-name, "logo-mobile");
+        }
+      }
+    }
+  }
+}

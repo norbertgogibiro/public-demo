@@ -1,0 +1,15 @@
+@use '../../../styles/settings' as *;
+
+a {
+  &,
+  &:active,
+  &:visited {
+    transition: color $speed-normal;
+  }
+
+  &:focus,
+  &:hover {
+    outline: none;
+    text-decoration: none;
+  }
+}

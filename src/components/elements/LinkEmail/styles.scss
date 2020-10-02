@@ -1,0 +1,22 @@
+@use '../../../styles/settings' as *;
+
+.link-email {
+  &,
+  &:active,
+  &:visited {
+    color: $color-orange;
+  }
+
+  &:focus,
+  &:hover {
+    text-decoration: none;
+  }
+
+  &:before {
+    content: attr(data-name) "@";
+  }
+
+  &:after {
+    content: attr(data-domain) "." attr(data-tld);
+  }
+};
