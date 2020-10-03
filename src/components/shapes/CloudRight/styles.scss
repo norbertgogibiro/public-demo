@@ -5,16 +5,24 @@
   position: absolute;
   top: 0;
   left: 79%;
-  animation: cloud-right 7s ease-in-out 0.5s infinite alternate-reverse;
+  animation: cloud-right 6s ease-in-out 0.5s infinite alternate-reverse;
 
   .cloud-right-shape {
     path {
       transition: $speed-normal;
-      animation: cloud-right-shape-path 3s ease-in-out infinite alternate;
     }
   }
 
   @include screens-smaller-than(sm) {
     transform: translate(-50%, -30%) scaleY(-0.8);
+  }
+}
+
+@keyframes cloud-right {
+  from {
+    left: 89%;
+  }
+  to {
+    left: 79%;
   }
 }
