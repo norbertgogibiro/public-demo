@@ -7,6 +7,8 @@ import { ErrorBoundary, AppContext } from './components/misc';
 import { Header, Main, Footer } from './components/layout';
 
 const defaultThemeName = 'orange';
+const minAllowedProbability = 0;
+const maxAllowedProbability = 100;
 const themeProbability = {
 	orange: 60,
 	yellow: 10,
@@ -18,10 +20,7 @@ const themeProbability = {
 
 const getThemeOptions = function (currentThemeName = defaultThemeName) {
 	const themeProbabilityValues = Object.values(themeProbability);
-
 	const allValuesValid = themeProbabilityValues.every(val => {
-		const minAllowedProbability = 0;
-		const maxAllowedProbability = 100;
 		const isWholeNumber = Number.isInteger(val);
 		const isValid = isWholeNumber && (val > minAllowedProbability - 1) && (val < maxAllowedProbability + 1);
 
@@ -53,7 +52,7 @@ const App = () => {
 	const switchTheme = () => setThemeName(getRandomThemeName(themeName));
 
 	return (
-		<div className={`theme-${themeName}`}>
+		<div className={`canvas theme-${themeName}`}>
 			<ErrorBoundary>
 				<AppContext.Provider value={{ switchTheme }}>
 					<Header />

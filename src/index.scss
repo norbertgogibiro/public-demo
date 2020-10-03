@@ -50,3 +50,11 @@ small {
     margin: 0.5em 0;
   }
 }
+
+.canvas {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  z-index: $level-layer-bottom;
+}
