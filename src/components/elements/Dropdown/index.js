@@ -16,7 +16,7 @@ const Dropdown = ({ openerButtonText, children }) => {
 			setEyeTrippingState(false);
 			closerEvents.forEach(eventName => document.removeEventListener(eventName, handleDropdownClosing));
 		}
-	}
+	};
 
 	if (dropdownOpenState) {
 		dropdownWrapperClasses.push('dropdown-state-open');
@@ -30,7 +30,7 @@ const Dropdown = ({ openerButtonText, children }) => {
 
 		return function cleanUp() {
 			closerEvents.forEach(eventName => document.removeEventListener(eventName, handleDropdownClosing));
-		}
+		};
 	}, [dropdownOpenState]);
 
 	return (
