@@ -49,12 +49,18 @@ const getRandomThemeName = function() {
 
 const App = () => {
 	const [themeName, setThemeName] = useState(getRandomThemeName());
+	const [eyeTrippingState, setEyeTrippingState] = useState(false);
 	const switchTheme = () => setThemeName(getRandomThemeName(themeName));
+	const appContextProps = {
+		switchTheme,
+		eyeTrippingState,
+		setEyeTrippingState
+	};
 
 	return (
 		<div className={`canvas theme-${themeName}`}>
 			<ErrorBoundary>
-				<AppContext.Provider value={{ switchTheme }}>
+				<AppContext.Provider value={appContextProps}>
 					<Header />
 					<Main />
 					<Footer />
