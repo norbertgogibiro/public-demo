@@ -19,7 +19,7 @@ const coordinatesEnd = [
 
 const CloudRight = () => (
 	<div className="cloud-right" style={{ width: `${width}px`, height: `${height}px` }}>
-		<SvgWrapper width={width} height={height}>
+		<SvgWrapper width={width} height={height} className="cloud-right-shape">
 			<path d={coordinatesStart}>
 				<SvgPathAnimation
 					duration={3500}

@@ -14,11 +14,11 @@ $export: (
     "background": $color-black,
     "link-general": $color-orange,
     "link-email": $color-orange,
-    "dropdown-background": $color-black,
-    "dropdown-text": $color-yellow,
-    "dropdown-link-general": $color-yellow,
+    "dropdown-background": $color-yellow,
+    "dropdown-text": $color-blue,
+    "dropdown-link-general": $color-blue,
     "dropdown-link-general-hover": $color-orange,
-    "dropdown-border": $color-yellow,
+    "dropdown-border": $color-blue,
     "menu-item-normal": $color-yellow,
     "menu-item-alternative": $color-orange,
 
@@ -34,6 +34,6 @@ $export: (
     "eye-ball-middle-outer": $color-blue,
     "eye-ball-middle-inner": $color-black,
     "eye-ball-innermost": $color-orange,
-    "star": $color-black
+    "star": $color-blue
   )
 );

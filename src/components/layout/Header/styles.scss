@@ -1,5 +1,6 @@
 @use '../../../styles/settings' as *;
 @use '../../../styles/mixins' as *;
+@use "../../../styles/functions" as *;
 
 header {
   position: absolute;
@@ -92,5 +93,51 @@ header {
     bottom: $size-margin-header * 2;
     left: 0;
     font-size: $size-letter-normal;
+  }
+}
+
+// THEME-DEPENDENT COLORING:
+@each $theme-name in get-theme-names() {
+  .#{$theme-name} {
+    .nav-list {
+      li {
+        &:nth-child(odd) {
+          button {
+            color: get-color($theme-name, "menu-item-normal");
+  
+            &:focus,
+            &:hover {
+              border-color: get-color($theme-name, "menu-item-alternative");
+            }
+          }
+        }
+  
+        &:nth-child(even) {
+          button {
+            color: get-color($theme-name, "menu-item-alternative");
+  
+            &:focus,
+            &:hover {
+              border-color: get-color($theme-name, "menu-item-normal");
+            }
+          }
+        }
+      }
+  
+      a {
+        &:not(.link-email) {
+          &,
+          &:active,
+          &:visited {
+            color: get-color($theme-name, "dropdown-link-general");
+          }
+  
+          &:focus,
+          &:hover {
+            color: get-color($theme-name, "dropdown-link-general-hover");
+          }
+        }
+      }
+    }
   }
 }

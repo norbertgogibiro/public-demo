@@ -1,5 +1,6 @@
 @use "../../../styles/settings" as *;
 @use "../../../styles/mixins" as *;
+@use "../../../styles/functions" as *;
 
 .star {
   position: absolute;
@@ -15,7 +16,6 @@
 
     path {
       transition: $speed-normal;
-      animation: star-path 1.4s ease-in-out infinite alternate-reverse forwards;
     }
 
     @include screens-smaller-than(sm) {
@@ -29,6 +29,19 @@
 
       @include screens-smaller-than(sm) {
         transform: rotate(10deg) scale(0.25, 0.275);
+      }
+    }
+  }
+}
+
+// THEME-DEPENDENT COLORING:
+@each $theme-name in get-theme-names() {
+  .#{$theme-name} {
+    .star {
+      .star-shape {
+        path {
+          fill: get-color($theme-name, "star");
+        }
       }
     }
   }

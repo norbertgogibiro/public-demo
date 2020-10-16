@@ -1,5 +1,6 @@
 @use '../../../styles/settings' as *;
 @use '../../../styles/mixins' as *;
+@use "../../../styles/functions" as *;
 
 .cloud-right {
   position: absolute;
@@ -24,5 +25,18 @@
   }
   to {
     left: 79%;
+  }
+}
+
+// THEME-DEPENDENT COLORING:
+@each $theme-name in get-theme-names() {
+  .#{$theme-name} {
+    .cloud-right {
+      .cloud-right-shape {
+        path {
+          fill: get-color($theme-name, "cloud-right");
+        }
+      }
+    }
   }
 }

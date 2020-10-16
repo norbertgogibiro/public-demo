@@ -21,7 +21,6 @@ $-speed-eye-drops: 1s;
   }
 }
 
-
 // THEME-DEPENDENT COLORING:
 @each $theme-name in get-theme-names() {
   .#{$theme-name} {

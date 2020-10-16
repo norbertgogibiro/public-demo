@@ -1,4 +1,5 @@
 @use '../../../styles/settings' as *;
+@use "../../../styles/functions" as *;
 
 main {
   position: absolute;
@@ -7,4 +8,17 @@ main {
   bottom: 0;
   right: 0;
   z-index: $level-layer-middle;
+}
+
+.canvas {
+  transition: background-color $speed-normal;
+}
+
+// THEME-DEPENDENT COLORING:
+@each $theme-name in get-theme-names() {
+  .#{$theme-name} {
+    .canvas {
+      background: get-color($theme-name, "background");
+    }
+  }
 }
