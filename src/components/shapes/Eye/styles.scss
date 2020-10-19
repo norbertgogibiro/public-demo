@@ -75,10 +75,6 @@ $-size-eyeball: 250px;
     position: absolute;
     top: 0;
     left: 0;
-
-    path {
-      transition: fill $speed-eye-blink;
-    }
   }
 
   .eye-ball-clip {
