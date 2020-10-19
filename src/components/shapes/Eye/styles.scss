@@ -168,9 +168,31 @@ $-size-eyeball: 250px;
 @each $theme-name in get-theme-names() {
   .#{$theme-name} {
     .eye-clip {
+      /* 
+      // Draws a terrible one-pixel-wide contour around the eye:
+      clip-path: polygon(
+        0% 50%, 
+        17% 29%, 
+        29% 18%, 
+        43% 12%, 
+        50% 12%, 
+        57% 13%, 
+        71% 19%, 
+        83% 29%, 
+        100% 50%, 
+        83% 71%, 
+        71% 81%, 
+        57% 87%, 
+        50% 88%, 
+        43% 87%, 
+        29% 81%, 
+        17% 70%
+      );
+ */
+
       &:before {
         background: get-color($theme-name, "eye-white-outermost");
-        transition: $speed-eye-blink
+        transition: $speed-eye-blink;
       }
 
       .eye-lids-simple {
