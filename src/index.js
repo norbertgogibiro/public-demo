@@ -18,7 +18,8 @@ const themeProbability = {
 	poison: 2
 };
 
-const getThemeOptions = function (currentThemeName = defaultThemeName) {
+
+const getRandomThemeName = function (currentThemeName) {
 	const themeProbabilityValues = Object.values(themeProbability);
 	const allValuesValid = themeProbabilityValues.every(val => {
 		const isWholeNumber = Number.isInteger(val);
@@ -34,16 +35,17 @@ const getThemeOptions = function (currentThemeName = defaultThemeName) {
 		return isValid;
 	});
 
-	return !allValuesValid ? [defaultThemeName] : [
-		...Object.keys(themeProbability).filter(themeName => themeName !== currentThemeName)
-	];
-};
+	if (!allValuesValid) {
+		return defaultThemeName;
+	}
 
+	const themeNameDice = Object.entries(themeProbability)
+		.filter(({ 0: themeName }) => themeName !== currentThemeName)
+		.map(({ 0: themeName, 1: probability }) => new Array(probability).fill(themeName))
+		.flat();
 
-const getRandomThemeName = function (currentThemeName) {
-	const themeOptions = getThemeOptions(currentThemeName);
-	return themeOptions[
-		Math.round(getRandomAmount(0, themeOptions.length - 1))
+	return themeNameDice[
+		Math.round(getRandomAmount(0, themeNameDice.length - 1))
 	];
 };
 
