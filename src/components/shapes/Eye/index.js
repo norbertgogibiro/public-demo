@@ -86,7 +86,7 @@ const Eye = () => {
 										<div className="eye-ball eye-ball-innermost"></div>
 
 										{/* The innermost eye's blinking lids */}
-										<LidsShape className="eye-lids-innermost" />
+										<LidsShape className="eye-lids-innermost" shouldBlinkAutomatically />
 									</div>
 
 									{/* The inner part of the middle inner eye's blinking horizontal lids */}
@@ -105,10 +105,7 @@ const Eye = () => {
 				</div >
 
 				{/* The main eye's blinking lids */}
-				<LidsShape
-					shouldBlinkOnClick
-					shouldBlinkAutomatically={isEyeTripping}
-				/>
+				<LidsShape shouldBlinkOnClick shouldBlinkAutomatically={!isEyeTripping}/>
 			</div >
 		</div >
 	);
