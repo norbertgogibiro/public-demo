@@ -8,6 +8,7 @@
   left: 0;
   width: 10em;
   height: 10em;
+  z-index: $level-layer-top;
 
   &:focus {
     transform: scale($size-focus-scale);
