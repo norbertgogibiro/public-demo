@@ -13,23 +13,24 @@
     top: 0;
     left: 0;
     transform: scale(0.4);
+    transition: transform $speed-smoke;
 
     path {
       transition: $speed-normal;
     }
 
     @include screens-smaller-than(sm) {
-      transform: scale(0.2);
+      transform: scale(0.3);
     }
   }
+}
 
-  &.is-grown {
-    .star-shape {
-      transform: rotate(10deg) scale(0.6, 0.65);
+.is-eye-tripping {
+  .star-shape {
+    transform: scale(0.6);
 
-      @include screens-smaller-than(sm) {
-        transform: rotate(10deg) scale(0.25, 0.275);
-      }
+    @include screens-smaller-than(sm) {
+      transform: scale(0.4);
     }
   }
 }

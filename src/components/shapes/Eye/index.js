@@ -68,7 +68,7 @@ const Eye = () => {
 	}, [isEyeFollowing]);
 	return (
 		<div className="eye-clip" style={{ width: `${eyeLidsWidthSimple}px` }}>
-			<div className={['eye', isEyeTripping ? 'is-tripping' : ''].filter(x => !!x).join(' ')} style={eyeDimensions}>
+			<div className='eye' style={eyeDimensions}>
 				<div className="eye-ball-clip">
 					<div className="eye-ball-boundary">
 

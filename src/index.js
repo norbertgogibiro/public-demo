@@ -57,8 +57,17 @@ const App = () => {
 		setEyeTrippingState
 	};
 
+	const canvasClasses = [
+		'canvas',
+		`theme-${themeName}`
+	];
+
+	if (isEyeTripping) {
+		canvasClasses.push('is-eye-tripping');
+	}
+
 	return (
-		<div className={`canvas theme-${themeName}`}>
+		<div className={canvasClasses.join(' ')}>
 			<ErrorBoundary>
 				<AppContext.Provider value={appContextProps}>
 					<Header />
