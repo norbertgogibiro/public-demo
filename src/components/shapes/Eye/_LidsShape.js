@@ -1,6 +1,8 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useContext } from 'react';
 import PropTypes from 'prop-types';
+import { AppContext } from '../../misc';
 import { getRandomAmount } from '../../../common/utils';
+import { eyeBlinkTime } from './_localSettings';
 
 import {
 	eyeLidsWidthSimple,
@@ -33,10 +35,11 @@ const LidsShape = props => {
 		isCrossShape,
 		shouldBlinkAutomatically = false,
 		shouldBlinkOnClick = false,
+		shouldNotBlinkAtAll = false,
 		className,
-		blinkingSpeed = 200,
-		minWaitingBeforeBlinking = blinkingSpeed,
+		minWaitingBeforeBlinking = eyeBlinkTime,
 		maxWaitingBeforeBlinking = 9000,
+		animationDelay,
 		animationRepeatCount = '0',
 		animationFillMode = 'freeze',
 		keyframes = [
@@ -49,7 +52,7 @@ const LidsShape = props => {
 	const [isAutoBlinkingAllowed, setAutoBlinkingPermission] = useState(shouldBlinkAutomatically);
 	const [blinkingTriggeredBy, setBlinkingTriggeredBy] = useState(blinkTriggers.none);
 	const [lastBlinkingWaitTime, setLastBlinkingWaitTime] = useState(0);
-	const toggleEyeOpenState = () => setOpenState(!isOpen);
+	const { isEyeTripping } = useContext(AppContext);
 	const triggerBlinking = triggeredBy => setBlinkingTriggeredBy(triggeredBy);
 	const handleDocumentClick = useCallback(() => triggerBlinking(blinkTriggers.click));
 	const shapeWidth = isCrossShape ? eyeLidsWidthCross : eyeLidsWidthSimple;
@@ -58,11 +61,13 @@ const LidsShape = props => {
 	const coordinatesStart = isOpen ? coordinatesClosed : coordinatesOpen;
 	const coordinatesEnd = isOpen ? coordinatesOpen : coordinatesClosed;
 	const performBlinking = function () {
-		setOpenState(false);
-		setTimeout(() => {
-			setOpenState(true);
-			setBlinkingTriggeredBy(blinkTriggers.none);
-		}, blinkingSpeed);
+		if (!shouldNotBlinkAtAll) {
+			setOpenState(false);
+			setTimeout(() => {
+				setOpenState(true);
+				setBlinkingTriggeredBy(blinkTriggers.none);
+			}, eyeBlinkTime);
+		}
 	};
 
 	// Make the eye blink automatically:
@@ -98,6 +103,11 @@ const LidsShape = props => {
 		}
 	}, [blinkingTriggeredBy, isAutoBlinkingAllowed]);
 
+	// Handle tripping eye state change:
+	useEffect(() => {
+		performBlinking();
+	}, [isEyeTripping]);
+
 	// Set document click handler:
 	useEffect(() => {
 		const removeDocumentClickHandler = () => document.removeEventListener(clickEventName, handleDocumentClick);
@@ -123,7 +133,8 @@ const LidsShape = props => {
 		>
 			<path d={coordinatesStart}>
 				<SvgPathAnimation
-					duration={blinkingSpeed}
+					duration={eyeBlinkTime}
+					delay={animationDelay}
 					coordinatesStart={coordinatesStart}
 					coordinatesEnd={coordinatesEnd}
 					keyframes={keyframes}
@@ -139,12 +150,14 @@ LidsShape.propTypes = {
 	isCrossShape: PropTypes.bool,
 	shouldBlinkAutomatically: PropTypes.bool,
 	shouldBlinkOnClick: PropTypes.bool,
+	shouldNotBlinkAtAll: PropTypes.bool,
 	className: PropTypes.string,
-	blinkingSpeed: PropTypes.number,
 	animationRepeatCount: PropTypes.number,
+	animationDelay: PropTypes.number,
 	animationFillMode: PropTypes.string,
 	minWaitingBeforeBlinking: PropTypes.number,
 	maxWaitingBeforeBlinking: PropTypes.number,
+	handleTrippingEyeStateChange: PropTypes.func,
 	keyframes: PropTypes.arrayOf(
 		PropTypes.instanceOf(SvgAnimationKeyframe),
 	),

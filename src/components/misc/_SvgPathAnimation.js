@@ -7,6 +7,7 @@ const SvgPathAnimation = props => {
 	const {
 		fillMode,
 		duration,
+		delay = 0,
 		coordinatesStart,
 		coordinatesEnd,
 		repeatCount = 'indefinite',
@@ -33,7 +34,7 @@ const SvgPathAnimation = props => {
 		restart,
 		from: coordinatesStart,
 		to: coordinatesEnd,
-		begin: '0s',
+		begin: `${delay}ms`,
 		values: finalKeyframeOrder.join(';'),
 		keyTimes: keyframes.map(({ keyframeTime }) => keyframeTime).join('; '),
 		fill: fillMode
@@ -50,6 +51,7 @@ const SvgPathAnimation = props => {
 
 SvgPathAnimation.propTypes = {
 	duration: PropTypes.number.isRequired,
+	delay: PropTypes.number,
 	coordinatesStart: PropTypes.string.isRequired,
 	coordinatesEnd: PropTypes.string.isRequired,
 	keyframes: PropTypes.arrayOf(

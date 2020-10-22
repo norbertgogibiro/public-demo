@@ -1,16 +1,20 @@
 import React, { useContext, useState, useRef, useEffect, useCallback } from 'react';
-import PropTypes from 'prop-types';
 import { AppContext } from '../../misc';
 import { getRandomAmount } from '../../../common/utils';
 import './styles.scss';
-import { eyeLidsWidthSimple, eyeLidsHeight, cursorFollowingTime } from './_localSettings';
+import { 
+	eyeLidsWidthSimple, 
+	eyeLidsHeight, 
+	eyeBlinkTime,
+	cursorFollowingTime 
+} from './_localSettings';
 import LidsShape from './_LidsShape';
 
 const stalledEyeClassName = 'is-stalled';
 
-const Eye = ({ allowCursorFollowMode = true }) => {
-	const [isEyeFollowing, setEyeFollowingMode] = useState(allowCursorFollowMode);
-	const { eyeTrippingState } = useContext(AppContext);
+const Eye = () => {
+	const [isEyeFollowing, setEyeFollowingMode] = useState(true);
+	const { isEyeTripping } = useContext(AppContext);
 	const refCursorFollower = useRef();
 	const eyeDimensions = {
 		width: `${eyeLidsWidthSimple}px`,
@@ -28,7 +32,7 @@ const Eye = ({ allowCursorFollowMode = true }) => {
 	});
 
 	useEffect(() => {
-		if (allowCursorFollowMode) {
+		if (!isEyeTripping) {
 			const { min, max } = cursorFollowingTime[isEyeFollowing ? 'active' : 'passive'];
 			const { current: cursorFollowerElement } = refCursorFollower;
 			setTimeout(() => {
@@ -41,7 +45,11 @@ const Eye = ({ allowCursorFollowMode = true }) => {
 			setEyeFollowingMode(false);
 			setEyeBallPosition();
 		}
-	}, [isEyeFollowing, allowCursorFollowMode]);
+	}, [isEyeFollowing, isEyeTripping]);
+
+	useEffect(() => {
+		setEyeFollowingMode(!isEyeTripping);
+	}, [isEyeTripping]);
 
 	useEffect(() => {
 		const eventName = 'mousemove';
@@ -58,10 +66,9 @@ const Eye = ({ allowCursorFollowMode = true }) => {
 
 		return () => removeCursorTrackerEvent();
 	}, [isEyeFollowing]);
-
 	return (
 		<div className="eye-clip" style={{ width: `${eyeLidsWidthSimple}px` }}>
-			<div className="eye" style={eyeDimensions}>
+			<div className={['eye', isEyeTripping ? 'is-tripping' : ''].filter(x => !!x).join(' ')} style={eyeDimensions}>
 				<div className="eye-ball-clip">
 					<div className="eye-ball-boundary">
 
@@ -83,29 +90,28 @@ const Eye = ({ allowCursorFollowMode = true }) => {
 									</div>
 
 									{/* The inner part of the middle inner eye's blinking horizontal lids */}
-									<LidsShape />
+									<LidsShape animationDelay={eyeBlinkTime} />
 								</div>
 
 								{/* The middle inner eye's non-blinking vertical lids */}
-								<LidsShape />
+								<LidsShape shouldNotBlinkAtAll />
 
 								{/* The outer part of the middle inner eye's blinking */}
 								{/* horizontal lids with a cut for the vertical eye */}
-								<LidsShape isCrossShape />
+								<LidsShape isCrossShape animationDelay={eyeBlinkTime} />
 							</div>
 						</div>
 					</div >
 				</div >
 
 				{/* The main eye's blinking lids */}
-				<LidsShape shouldBlinkOnClick shouldBlinkAutomatically />
+				<LidsShape
+					shouldBlinkOnClick
+					shouldBlinkAutomatically={isEyeTripping}
+				/>
 			</div >
 		</div >
 	);
-};
-
-Eye.propTypes = {
-	allowCursorFollowMode: PropTypes.bool
 };
 
 export default Eye;
