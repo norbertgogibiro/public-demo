@@ -40,8 +40,8 @@ const getThemeOptions = function (currentThemeName = defaultThemeName) {
 };
 
 
-const getRandomThemeName = function () {
-	const themeOptions = getThemeOptions();
+const getRandomThemeName = function (currentThemeName) {
+	const themeOptions = getThemeOptions(currentThemeName);
 	return themeOptions[
 		Math.round(getRandomAmount(0, themeOptions.length - 1))
 	];
