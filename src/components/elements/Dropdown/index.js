@@ -10,11 +10,14 @@ const Dropdown = ({ openerButtonText, children }) => {
 	const [dropdownOpenState, setDropdownOpenState] = useState(false);
 	const { setEyeTrippingState } = useContext(AppContext);
 	const dropdownWrapperClasses = ['dropdown-container'];
-	const handleDropdownClosing = ({ key, type }) => {
+	const handleDropdownClosing = ({ key, type, target }) => {
 		if (clickEvents.includes(type) || (type === 'keyup' && key === 'Escape')) {
 			setDropdownOpenState(false);
-			setEyeTrippingState(false);
 			closerEvents.forEach(eventName => document.removeEventListener(eventName, handleDropdownClosing));
+
+			if (!target.classList.contains('dropdown-opener')) {
+				setEyeTrippingState(false);
+			}
 		}
 	};
 
