@@ -12,6 +12,18 @@ main {
 
 .canvas {
   transition: background-color $speed-normal;
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    opacity: 0;
+    z-index: $level-layer-bottom;
+    transition: opacity $speed-smoke;
+  }
 }
 
 // THEME-DEPENDENT COLORING:
@@ -19,6 +31,15 @@ main {
   .#{$theme-name} {
     .canvas {
       background: get-color($theme-name, "background");
+    }
+
+    &.is-eye-tripping {
+      .canvas {
+        &:before {
+          background: get-color($theme-name, "background-trippy-layer");
+          opacity: 0.5;
+        }
+      }
     }
   }
 }
