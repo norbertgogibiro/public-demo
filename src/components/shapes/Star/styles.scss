@@ -10,10 +10,20 @@
   height: 696px;
   transform: translate(-50%, -50%) scale(0.4);
   transition: transform $speed-smoke, background-color $speed-normal;
-  animation: star 3s ease-in-out infinite alternate-reverse;
+  animation: star 3.2s ease-in-out infinite alternate-reverse;
+  cursor: pointer;
+
+  &:hover {
+    transform: translate(-50%, -50%) scale(0.43);
+    transition: transform $speed-smoke / 2;
+  }
 
   @include screens-smaller-than(sm) {
     transform: translate(-50%, -50%) scale(0.3);
+
+    &:hover {
+      transform: translate(-50%, -50%) scale(0.32);
+    }
   }
 }
 

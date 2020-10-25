@@ -33,16 +33,6 @@ $-size-eyeball: 250px;
     border-radius: 50%;
     transform: translate(-50%, -50%);
 
-    &:after {
-      content: "";
-      position: absolute;
-      top: $margin-eye-hoverArea * -1;
-      bottom: $margin-eye-hoverArea * -1;
-      left: $margin-eye-hoverArea * -1;
-      right: $margin-eye-hoverArea * -1;
-      border-radius: 50%;
-    }
-
     &:focus {
       & > .eye-ball {
         transform: translate(-50%, -50%) scale(1.3);

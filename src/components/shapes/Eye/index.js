@@ -1,19 +1,20 @@
 import React, { useContext, useState, useRef, useEffect, useCallback } from 'react';
+import PropTypes from 'prop-types';
 import { AppContext } from '../../misc';
 import { getRandomAmount } from '../../../common/utils';
 import './styles.scss';
-import { 
-	eyeLidsWidthSimple, 
-	eyeLidsHeight, 
+import {
+	eyeLidsWidthSimple,
+	eyeLidsHeight,
 	eyeBlinkTime,
-	cursorFollowingTime 
+	cursorFollowingTime
 } from './_localSettings';
 import LidsShape from './_LidsShape';
 
 const stalledEyeClassName = 'is-stalled';
 
-const Eye = () => {
-	const [isEyeFollowing, setEyeFollowingMode] = useState(true);
+const Eye = ({ shouldClose }) => {
+	const [isFollowingCursorMovement, setCursorFollowingMode] = useState(true);
 	const { isEyeTripping } = useContext(AppContext);
 	const refCursorFollower = useRef();
 	const eyeDimensions = {
@@ -33,29 +34,29 @@ const Eye = () => {
 
 	useEffect(() => {
 		if (!isEyeTripping) {
-			const { min, max } = cursorFollowingTime[isEyeFollowing ? 'active' : 'passive'];
+			const { min, max } = cursorFollowingTime[isFollowingCursorMovement ? 'active' : 'passive'];
 			const { current: cursorFollowerElement } = refCursorFollower;
 			setTimeout(() => {
-				setEyeFollowingMode(!isEyeFollowing);
-				cursorFollowerElement.classList[isEyeFollowing ? 'add' : 'remove'](stalledEyeClassName);
+				setCursorFollowingMode(!isFollowingCursorMovement);
+				cursorFollowerElement.classList[isFollowingCursorMovement ? 'add' : 'remove'](stalledEyeClassName);
 			}, getRandomAmount(min, max));
 		}
 
 		else {
-			setEyeFollowingMode(false);
+			setCursorFollowingMode(false);
 			setEyeBallPosition();
 		}
-	}, [isEyeFollowing, isEyeTripping]);
+	}, [isFollowingCursorMovement, isEyeTripping]);
 
 	useEffect(() => {
-		setEyeFollowingMode(!isEyeTripping);
+		setCursorFollowingMode(!isEyeTripping);
 	}, [isEyeTripping]);
 
 	useEffect(() => {
 		const eventName = 'mousemove';
 		const removeCursorTrackerEvent = () => document.removeEventListener(eventName, setEyeBallPosition);
 
-		if (isEyeFollowing) {
+		if (isFollowingCursorMovement) {
 			document.addEventListener(eventName, setEyeBallPosition);
 		}
 
@@ -65,9 +66,13 @@ const Eye = () => {
 		}
 
 		return () => removeCursorTrackerEvent();
-	}, [isEyeFollowing]);
+	}, [isFollowingCursorMovement]);
+
 	return (
-		<div className="eye-clip" style={{ width: `${eyeLidsWidthSimple}px` }}>
+		<div
+			className="eye-clip"
+			style={{ width: `${eyeLidsWidthSimple}px` }}
+		>
 			<div className='eye' style={eyeDimensions}>
 				<div className="eye-ball-clip">
 					<div className="eye-ball-boundary">
@@ -105,10 +110,18 @@ const Eye = () => {
 				</div >
 
 				{/* The main eye's blinking lids */}
-				<LidsShape shouldBlinkOnClick shouldBlinkAutomatically={!isEyeTripping}/>
+				<LidsShape
+					shouldBlinkOnClick
+					shouldBlinkAutomatically={!isEyeTripping}
+					shouldClose={shouldClose}
+				/>
 			</div >
 		</div >
 	);
 };
+
+Eye.propTypes = {
+	shouldClose: PropTypes.bool
+}
 
 export default Eye;

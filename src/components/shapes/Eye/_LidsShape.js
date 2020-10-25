@@ -33,6 +33,7 @@ const blinkTriggers = {
 const LidsShape = props => {
 	const {
 		isCrossShape,
+		shouldClose = false,
 		shouldBlinkAutomatically = false,
 		shouldBlinkOnClick = false,
 		shouldNotBlinkAtAll = false,
@@ -49,24 +50,30 @@ const LidsShape = props => {
 	} = props;
 
 	const [isOpen, setOpenState] = useState(true);
-	const [isAutoBlinkingAllowed, setAutoBlinkingPermission] = useState(shouldBlinkAutomatically);
+	const [isAutoBlinkingAllowed, setAutoBlinkingPermission] = useState(shouldBlinkAutomatically && !shouldClose);
 	const [blinkingTriggeredBy, setBlinkingTriggeredBy] = useState(blinkTriggers.none);
 	const [lastBlinkingWaitTime, setLastBlinkingWaitTime] = useState(0);
+	const [timerIds, setTimerIds] = useState([]);
 	const { isEyeTripping } = useContext(AppContext);
 	const triggerBlinking = triggeredBy => setBlinkingTriggeredBy(triggeredBy);
+	const clearAllTimers = () => timerIds.forEach(timerId => clearTimeout(timerId));
 	const handleDocumentClick = useCallback(() => triggerBlinking(blinkTriggers.click));
 	const shapeWidth = isCrossShape ? eyeLidsWidthCross : eyeLidsWidthSimple;
 	const coordinatesClosed = isCrossShape ? coordinatesCrossClosed : coordinatesSimpleClosed;
 	const coordinatesOpen = isCrossShape ? coordinatesCrossOpen : coordinatesSimpleOpen;
 	const coordinatesStart = isOpen ? coordinatesClosed : coordinatesOpen;
 	const coordinatesEnd = isOpen ? coordinatesOpen : coordinatesClosed;
-	const performBlinking = function () {
+	const blink = function () {
 		if (!shouldNotBlinkAtAll) {
 			setOpenState(false);
-			setTimeout(() => {
-				setOpenState(true);
-				setBlinkingTriggeredBy(blinkTriggers.none);
-			}, eyeBlinkTime);
+			clearAllTimers();
+			setTimerIds([
+				...timerIds,
+				setTimeout(() => {
+					setOpenState(!shouldClose);
+					setBlinkingTriggeredBy(blinkTriggers.none);
+				}, eyeBlinkTime)
+			]);
 		}
 	};
 
@@ -86,26 +93,32 @@ const LidsShape = props => {
 				[Math.round(getRandomAmount(0, blinkSpeedDice.length - 1))]: waitingTimeBeforeBlinking
 			} = blinkSpeedDice.filter(diceValue => diceValue !== lastBlinkingWaitTime);
 
-			setTimeout(() => triggerBlinking(blinkTriggers.auto), waitingTimeBeforeBlinking);
+			setTimerIds([...timerIds, setTimeout(() => triggerBlinking(blinkTriggers.auto), waitingTimeBeforeBlinking)]);
 			setLastBlinkingWaitTime(randomBlinkWaitingTime);
 		}
 	}, [isOpen, isAutoBlinkingAllowed]);
 
 	// Update blinking permission:
 	useEffect(() => {
-		setAutoBlinkingPermission(shouldBlinkAutomatically);
-	}, [shouldBlinkAutomatically]);
+		setAutoBlinkingPermission(shouldBlinkAutomatically && !shouldClose);
+		setOpenState(!shouldClose);
+	}, [shouldBlinkAutomatically, shouldClose]);
 
 	// Check for triggered blinking:
 	useEffect(() => {
-		if (blinkingTriggeredBy !== blinkTriggers.none && isAutoBlinkingAllowed) {
-			performBlinking();
+		if (blinkingTriggeredBy !== blinkTriggers.none && isAutoBlinkingAllowed && !shouldClose) {
+			blink();
 		}
-	}, [blinkingTriggeredBy, isAutoBlinkingAllowed]);
+
+		if (shouldClose) {
+			clearAllTimers();
+			setOpenState(false);
+		}
+	}, [blinkingTriggeredBy, isAutoBlinkingAllowed, shouldClose]);
 
 	// Handle tripping eye state change:
 	useEffect(() => {
-		performBlinking();
+		blink();
 	}, [isEyeTripping]);
 
 	// Set document click handler:
@@ -148,6 +161,7 @@ const LidsShape = props => {
 
 LidsShape.propTypes = {
 	isCrossShape: PropTypes.bool,
+	shouldClose: PropTypes.bool,
 	shouldBlinkAutomatically: PropTypes.bool,
 	shouldBlinkOnClick: PropTypes.bool,
 	shouldNotBlinkAtAll: PropTypes.bool,
