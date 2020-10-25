@@ -56,7 +56,7 @@ const App = () => {
 	const appContextProps = {
 		switchTheme,
 		isEyeTripping,
-		setEyeTrippingState
+		setEyeTrippingState,
 	};
 
 	const canvasClasses = [

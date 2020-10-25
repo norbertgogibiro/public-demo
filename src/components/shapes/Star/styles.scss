@@ -2,38 +2,26 @@
 @use "../../../styles/mixins" as *;
 @use "../../../styles/functions" as *;
 
+$-width: 946px;
+$-height: 696px;
+$-scale-normal: 0.4;
+$-scale-trippy: 0.5;
+
 .star {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 946px;
-  height: 696px;
-  transform: translate(-50%, -50%) scale(0.4);
-  transition: transform $speed-smoke, background-color $speed-normal;
+  width: $-width * $-scale-normal;
+  height: $-height * $-scale-normal;
+  transform: translate(-50%, -50%);
+  transition: width $speed-smoke, height $speed-smoke, background-color $speed-normal;
   animation: star 3.2s ease-in-out infinite alternate-reverse;
-  cursor: pointer;
-
-  &:hover {
-    transform: translate(-50%, -50%) scale(0.43);
-    transition: transform $speed-smoke / 2;
-  }
-
-  @include screens-smaller-than(sm) {
-    transform: translate(-50%, -50%) scale(0.3);
-
-    &:hover {
-      transform: translate(-50%, -50%) scale(0.32);
-    }
-  }
 }
 
 .is-eye-tripping {
   .star {
-    transform: translate(-50%, -50%) scale(0.5);
-
-    @include screens-smaller-than(sm) {
-      transform: translate(-50%, -50%) scale(0.35);
-    }
+    width: $-width * $-scale-trippy;
+    height: $-height * $-scale-trippy;
   }
 }
 
