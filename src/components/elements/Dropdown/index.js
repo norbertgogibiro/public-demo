@@ -11,11 +11,13 @@ const Dropdown = ({ openerButtonText, children }) => {
 	const { setEyeTrippingState } = useContext(AppContext);
 	const dropdownWrapperClasses = ['dropdown-container'];
 	const handleDropdownClosing = ({ key, type, target }) => {
-		if (clickEvents.includes(type) || (type === 'keyup' && key === 'Escape')) {
+		const isEscapeButtonKeyup = (type === 'keyup' && key === 'Escape');
+
+		if (clickEvents.includes(type) || isEscapeButtonKeyup) {
 			setDropdownOpenState(false);
 			closerEvents.forEach(eventName => document.removeEventListener(eventName, handleDropdownClosing));
 
-			if (!target.classList.contains('dropdown-opener')) {
+			if (!target.classList.contains('dropdown-opener') || isEscapeButtonKeyup) {
 				setEyeTrippingState(false);
 			}
 		}
