@@ -1,5 +1,4 @@
 import React, { useContext, useState, useRef, useEffect, useCallback } from 'react';
-import PropTypes from 'prop-types';
 import { AppContext } from '../../misc';
 import { getRandomAmount } from '../../../common/utils';
 import './styles.scss';
@@ -13,10 +12,12 @@ import LidsShape from './_LidsShape';
 
 const stalledEyeClassName = 'is-stalled';
 
-const Eye = ({ shouldClose }) => {
+const Eye = () => {
 	const [isFollowingCursorMovement, setCursorFollowingMode] = useState(true);
-	const { isEyeTripping } = useContext(AppContext);
+	const [isHovered, setHoveredState] = useState(false);
 	const refCursorFollower = useRef();
+	const { isEyeTripping } = useContext(AppContext);
+
 	const eyeDimensions = {
 		width: `${eyeLidsWidthSimple}px`,
 		height: `${eyeLidsHeight}px`
@@ -70,58 +71,57 @@ const Eye = ({ shouldClose }) => {
 
 	return (
 		<div
-			className="eye-clip"
-			style={{ width: `${eyeLidsWidthSimple}px` }}
+			className='eye-wrap'
+			onMouseOver={() => setHoveredState(true)}
+			onMouseLeave={() => setHoveredState(false)}
 		>
-			<div className='eye' style={eyeDimensions}>
-				<div className="eye-ball-clip">
-					<div className="eye-ball-boundary">
+			<div className="eye-clip" style={{ width: `${eyeLidsWidthSimple}px` }}>
+				<div className='eye' style={eyeDimensions}>
+					<div className="eye-ball-clip">
+						<div className="eye-ball-boundary">
 
-						{/* The main eye ball */}
-						<div className="eye-ball eye-ball-cursor-follower" ref={refCursorFollower}>
+							{/* The main eye ball */}
+							<div className="eye-ball eye-ball-cursor-follower" ref={refCursorFollower}>
 
-							{/* The outermost layer of the trippy eyes */}
-							<div className="eye eye-inner">
+								{/* The outermost layer of the trippy eyes */}
+								<div className="eye eye-inner">
 
-								{/* The middle eye ball */}
-								<div className="eye-ball">
-									<div className="eye" style={eyeDimensions}>
+									{/* The middle eye ball */}
+									<div className="eye-ball">
+										<div className="eye" style={eyeDimensions}>
 
-										{/* The innermost eye ball */}
-										<div className="eye-ball eye-ball-innermost"></div>
+											{/* The innermost eye ball */}
+											<div className="eye-ball eye-ball-innermost"></div>
 
-										{/* The innermost eye's blinking lids */}
-										<LidsShape className="eye-lids-innermost" shouldBlinkAutomatically />
+											{/* The innermost eye's blinking lids */}
+											<LidsShape className="eye-lids-innermost" shouldBlinkAutomatically />
+										</div>
+
+										{/* The inner part of the middle inner eye's blinking horizontal lids */}
+										<LidsShape animationDelay={eyeBlinkTime} />
 									</div>
 
-									{/* The inner part of the middle inner eye's blinking horizontal lids */}
-									<LidsShape animationDelay={eyeBlinkTime} />
+									{/* The middle inner eye's non-blinking vertical lids */}
+									<LidsShape shouldNotBlinkAtAll />
+
+									{/* The outer part of the middle inner eye's blinking */}
+									{/* horizontal lids with a cut for the vertical eye */}
+									<LidsShape isCrossShape animationDelay={eyeBlinkTime} />
 								</div>
-
-								{/* The middle inner eye's non-blinking vertical lids */}
-								<LidsShape shouldNotBlinkAtAll />
-
-								{/* The outer part of the middle inner eye's blinking */}
-								{/* horizontal lids with a cut for the vertical eye */}
-								<LidsShape isCrossShape animationDelay={eyeBlinkTime} />
 							</div>
-						</div>
+						</div >
 					</div >
-				</div >
 
-				{/* The main eye's blinking lids */}
-				<LidsShape
-					shouldBlinkOnClick
-					shouldBlinkAutomatically={!isEyeTripping}
-					shouldClose={shouldClose}
-				/>
+					{/* The main eye's blinking lids */}
+					<LidsShape
+						shouldBlinkOnClick
+						shouldBlinkAutomatically={!isEyeTripping}
+						shouldClose={isHovered}
+					/>
+				</div >
 			</div >
-		</div >
+		</div>
 	);
 };
-
-Eye.propTypes = {
-	shouldClose: PropTypes.bool
-}
 
 export default Eye;

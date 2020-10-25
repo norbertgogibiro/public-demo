@@ -15,6 +15,7 @@ const Main = () => (
 			<CloudRight />
 			<Drop />
 			<Star />
+			<Eye />
 		</div>
 	</main>
 );

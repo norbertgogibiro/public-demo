@@ -1,21 +1,6 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './styles.scss';
-import Eye from '../Eye';
 
-const Star = () => {
-	const [isHovered, setHoverState] = useState(false);
-
-	const attributes = {
-		className: 'star',
-		onMouseOver: () => setHoverState(true),
-		onMouseLeave: () => setHoverState(false),
-	};
-
-	return (
-		<div {...attributes}>
-			<Eye shouldClose={isHovered} />
-		</div>
-	);
-}
+const Star = () => <div className='star' />;
 
 export default Star;
