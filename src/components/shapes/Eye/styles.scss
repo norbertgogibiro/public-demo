@@ -11,13 +11,9 @@ $-size-eyeball: 250px;
   height: $-size-eye-clip;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%) scale(0.3);
+  transform: translate(-50%, -50%) scale(0.75);
   transition: transform $speed-smoke;
   overflow: hidden;
-
-  @include screens-smaller-than(sm) {
-    transform: translate(-50%, -50%) scale(0.25);
-  }
 
   &:before {
     content: "";
@@ -155,11 +151,7 @@ $-size-eyeball: 250px;
 
 .is-eye-tripping {
   .eye-clip {
-    transform: translate(-50%, -50%) scale(0.4);
-
-    @include screens-smaller-than(sm) {
-      transform: translate(-50%, -50%) scale(0.35);
-    }
+    transform: translate(-50%, -50%) scale(0.8);
   }
 
   .eye-ball-cursor-follower {

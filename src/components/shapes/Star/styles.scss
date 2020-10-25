@@ -6,31 +6,23 @@
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  width: 946px;
+  height: 696px;
+  transform: translate(-50%, -50%) scale(0.4);
+  transition: transform $speed-smoke, background-color $speed-normal;
+  animation: star 3s ease-in-out infinite alternate-reverse;
 
-  .star-shape {
-    position: absolute;
-    top: 0;
-    left: 0;
-    transform: scale(0.4);
-    transition: transform $speed-smoke;
-
-    path {
-      transition: $speed-normal;
-    }
-
-    @include screens-smaller-than(sm) {
-      transform: scale(0.3);
-    }
+  @include screens-smaller-than(sm) {
+    transform: translate(-50%, -50%) scale(0.3);
   }
 }
 
 .is-eye-tripping {
-  .star-shape {
-    transform: scale(0.6);
+  .star {
+    transform: translate(-50%, -50%) scale(0.5);
 
     @include screens-smaller-than(sm) {
-      transform: scale(0.4);
+      transform: translate(-50%, -50%) scale(0.35);
     }
   }
 }
@@ -39,11 +31,51 @@
 @each $theme-name in get-theme-names() {
   .#{$theme-name} {
     .star {
-      .star-shape {
-        path {
-          fill: get-color($theme-name, "star");
-        }
-      }
+      background: get-color($theme-name, "star");
     }
+  }
+}
+
+@keyframes star {
+  from {
+    clip-path: polygon(
+      50% 22%,
+      69% 4%,
+      71% 30%,
+      97% 26%,
+      79% 50%,
+      97% 75%,
+      71% 71%,
+      69% 95%,
+      50% 79%,
+      31% 96%,
+      30% 71%,
+      1% 74%,
+      21% 50%,
+      3% 28%,
+      29% 29%,
+      31% 4%
+    );
+  }
+
+  to {
+    clip-path: polygon(
+      50% 17%,
+      69% 0%,
+      75% 25%,
+      100% 25%,
+      85% 50%,
+      100% 75%,
+      75% 75%,
+      69% 100%,
+      50% 83%,
+      31% 100%,
+      25% 75%,
+      0% 75%,
+      15% 50%,
+      0% 25%,
+      25% 25%,
+      31% 0%
+    );
   }
 }
