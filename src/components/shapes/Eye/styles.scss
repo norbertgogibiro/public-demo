@@ -48,7 +48,7 @@ $-size-eyeball: 250px;
     }
 
     &:focus {
-      .eye-ball {
+      & > .eye-ball {
         transform: translate(-50%, -50%) scale(1.3);
       }
     }
@@ -162,7 +162,7 @@ $-size-eyeball: 250px;
     }
   }
 
-  .eye-ball {
+  .eye-ball-cursor-follower {
     transform: translate(-50%, -50%) scale(1.15);
 
     & > .eye-inner {
