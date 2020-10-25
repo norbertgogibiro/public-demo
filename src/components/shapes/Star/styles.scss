@@ -16,6 +16,7 @@ $-scale-trippy: 0.5;
   transform: translate(-50%, -50%);
   transition: width $speed-smoke, height $speed-smoke, background-color $speed-normal;
   animation: star 3.2s ease-in-out infinite alternate-reverse;
+  z-index: $level-layer-middle + 1;
 }
 
 .is-eye-tripping {

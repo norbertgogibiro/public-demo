@@ -8,6 +8,7 @@
   left: 79%;
   animation: cloud-right 6s ease-in-out 0.5s infinite alternate-reverse;
   transition: transform $speed-smoke;
+  z-index: $level-layer-middle;
 
   .cloud-right-shape {
     path {

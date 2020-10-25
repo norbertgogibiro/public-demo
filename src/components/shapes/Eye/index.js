@@ -16,7 +16,11 @@ const Eye = () => {
 	const [isFollowingCursorMovement, setCursorFollowingMode] = useState(true);
 	const [isHovered, setHoveredState] = useState(false);
 	const refCursorFollower = useRef();
-	const { isEyeTripping } = useContext(AppContext);
+
+	const {
+		isEyeTripping,
+		setLastDropTriggerTime
+	} = useContext(AppContext);
 
 	const eyeDimensions = {
 		width: `${eyeLidsWidthSimple}px`,
@@ -74,6 +78,7 @@ const Eye = () => {
 			className='eye-wrap'
 			onMouseOver={() => setHoveredState(true)}
 			onMouseLeave={() => setHoveredState(false)}
+			onClick={() => setLastDropTriggerTime(new Date())}
 		>
 			<div className="eye-clip" style={{ width: `${eyeLidsWidthSimple}px` }}>
 				<div className='eye' style={eyeDimensions}>

@@ -52,11 +52,14 @@ const getRandomThemeName = function (currentThemeName) {
 const App = () => {
 	const [themeName, setThemeName] = useState(getRandomThemeName());
 	const [isEyeTripping, setEyeTrippingState] = useState(false);
+	const [lastDropTriggerTime, setLastDropTriggerTime] = useState(null)
 	const switchTheme = () => setThemeName(getRandomThemeName(themeName));
 	const appContextProps = {
 		switchTheme,
 		isEyeTripping,
+		lastDropTriggerTime,
 		setEyeTrippingState,
+		setLastDropTriggerTime
 	};
 
 	const canvasClasses = [
