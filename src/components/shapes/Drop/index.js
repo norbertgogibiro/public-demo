@@ -31,7 +31,6 @@ const Drop = () => {
 
 	return currentDrops.map(({ dropId: currentDropId, rotationAmount, animationDelay }) => {
 		const dropWrapAttributes = {
-			key: currentDropId,
 			className: 'drop-wrap',
 			style: { transform: `rotate(${rotationAmount}deg)` }
 		};
@@ -42,10 +41,10 @@ const Drop = () => {
 			onAnimationEnd: () => setCurrentDrops([
 				...currentDrops.filter(({ dropId }) => dropId !== currentDropId)
 			])
-		}
+		};
 
 		return (
-			<div {...dropWrapAttributes}>
+			<div key={currentDropId} {...dropWrapAttributes}>
 				<Shape {...dropShapeAttributes} />
 			</div>
 		);

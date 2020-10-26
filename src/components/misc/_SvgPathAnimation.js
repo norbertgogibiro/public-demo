@@ -23,7 +23,7 @@ const SvgPathAnimation = props => {
 	const keyframeCoordinates = {
 		start: coordinatesStart,
 		end: coordinatesEnd
-	}
+	};
 
 	const finalKeyframeOrder = keyframes.map(({ keyframeName }) => keyframeCoordinates[keyframeName]);
 
