@@ -17,6 +17,18 @@ $-scale-trippy: 0.5;
   transition: width $speed-smoke, height $speed-smoke, background-color $speed-normal;
   animation: star 3.2s ease-in-out infinite alternate-reverse;
   z-index: $level-layer-middle + 1;
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    opacity: 0.5;
+    background: url('src/assets/images/texture_6.png');
+    @include background-glitch-animation();
+  }
 }
 
 .is-eye-tripping {

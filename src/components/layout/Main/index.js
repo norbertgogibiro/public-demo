@@ -14,6 +14,7 @@ const Main = () => (
 			<CloudLeft />
 			<CloudRight />
 			<Drop />
+			<div className="layer-pattern" />
 			<Star />
 			<Eye />
 		</div>

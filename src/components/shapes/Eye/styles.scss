@@ -38,6 +38,18 @@ $-size-eyeball: 250px;
     transform: translate(-50%, -50%) rotate(-45deg);
   }
 
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    opacity: 1;
+    background: url('src/assets/images/texture_6.png');
+    @include background-glitch-animation()
+  }
+
   .eye {
     position: absolute;
     top: 50%;
@@ -53,6 +65,18 @@ $-size-eyeball: 250px;
 
     .eye-ball-cursor-follower {
       transition: background-color $speed-eye-blink;
+
+      &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        opacity: 0.5;
+        background: url('src/assets/images/texture_1.png');
+        @include background-glitch-animation()
+      }
 
       &.is-stalled {
         transition: $speed-eye-blink;

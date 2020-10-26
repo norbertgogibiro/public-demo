@@ -1,5 +1,6 @@
 @use '../../../styles/settings' as *;
 @use "../../../styles/functions" as *;
+@use "../../../styles/mixins" as *;
 
 main {
   position: absolute;
@@ -19,7 +20,7 @@ main {
   transition: background-color $speed-normal;
 
   &:before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -29,13 +30,48 @@ main {
     z-index: $level-layer-bottom;
     transition: opacity $speed-smoke;
   }
+
+  &:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    opacity: 0.5;
+    background-position: center;
+  }
+}
+
+.layer-pattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  opacity: 0.5;
+  z-index: $level-layer-middle;
+  background: url("src/assets/images/texture_6.png");
+  @include background-glitch-animation()
 }
 
 // THEME-DEPENDENT COLORING:
 @each $theme-name in get-theme-names() {
+  $-background-color: get-color($theme-name, "background");
+
   .#{$theme-name} {
     .canvas {
-      background: get-color($theme-name, "background");
+      background: $-background-color;
+
+      &:after {
+        @if $-background-color == $color-black {
+          background: url("src/assets/images/textura_dryink.png");
+        }
+
+        @else {
+          background: url("src/assets/images/texture_6.png");
+        }
+      }
     }
 
     &.is-eye-tripping {

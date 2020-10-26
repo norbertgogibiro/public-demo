@@ -11,3 +11,45 @@
     @content;
   }
 }
+
+@mixin background-glitch-animation-keyframes() {
+  @keyframes background-glitch {
+    0% {
+      background-position: top;
+    }
+
+    33% {
+      background-position: bottom;
+    }
+
+    66% {
+      background-position: left;
+    }
+
+    99% {
+      background-position: right;
+    }
+  }
+}
+
+@mixin background-glitch-animation($speed-animation: 1.5s) {
+  animation: background-glitch $speed-animation steps(4) infinite;
+
+  @keyframes background-glitch {
+    0% {
+      background-position: top;
+    }
+
+    33% {
+      background-position: bottom;
+    }
+
+    66% {
+      background-position: left;
+    }
+
+    99% {
+      background-position: right;
+    }
+  }
+}
