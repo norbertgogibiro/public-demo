@@ -4,3 +4,9 @@
 style.css.map
 
 node_modules/
+
+dist/bundle.js
+
+dist/index.html
+
+dist/main.css
