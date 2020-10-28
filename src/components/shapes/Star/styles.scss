@@ -4,8 +4,8 @@
 
 $-width: 946px;
 $-height: 696px;
-$-scale-normal: 0.4;
-$-scale-trippy: 0.5;
+$-scale-normal: 0.45;
+$-scale-trippy: 0.56;
 
 .star {
   position: absolute;
@@ -15,7 +15,7 @@ $-scale-trippy: 0.5;
   height: $-height * $-scale-normal;
   transform: translate(-50%, -50%);
   transition: width $speed-smoke, height $speed-smoke, background-color $speed-normal;
-  animation: star 3.2s ease-in-out infinite alternate-reverse;
+  animation: star 3.4s ease-in-out infinite alternate-reverse;
   z-index: $level-layer-middle + 1;
 
   &:after {
@@ -48,7 +48,7 @@ $-scale-trippy: 0.5;
 }
 
 @keyframes star {
-  from {
+  /* 0% {
     clip-path: polygon(
       50% 22%,
       69% 4%,
@@ -67,26 +67,13 @@ $-scale-trippy: 0.5;
       29% 29%,
       31% 4%
     );
+  } */
+
+  from {
+    clip-path: polygon(28% 2%, 50% 26%, 73% 1%, 74% 31%, 98% 34%, 79% 53%, 98% 75%, 70% 73%, 68% 98%, 50% 76%, 34% 97%, 30% 73%, 4% 74%, 26% 54%, 1% 33%, 30% 30%);
   }
 
   to {
-    clip-path: polygon(
-      50% 17%,
-      69% 0%,
-      75% 25%,
-      100% 25%,
-      85% 50%,
-      100% 75%,
-      75% 75%,
-      69% 100%,
-      50% 83%,
-      31% 100%,
-      25% 75%,
-      0% 75%,
-      15% 50%,
-      0% 25%,
-      25% 25%,
-      31% 0%
-    );
+    clip-path: polygon(30% 4%, 50% 24%, 70% 5%, 74% 31%, 96% 35%, 80% 53%, 95% 74%, 69% 72%, 68% 96%, 50% 78%, 34% 96%, 31% 72%, 5% 73%, 24% 52%, 2% 32%, 32% 32%);
   }
 }
