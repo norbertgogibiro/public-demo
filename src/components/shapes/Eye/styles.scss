@@ -16,6 +16,9 @@ $-size-eyeball: 250px;
   z-index: $level-layer-high;
   border-radius: 50%;
   cursor: pointer;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .eye-clip {
