@@ -8,14 +8,18 @@
   left: 0;
   width: 10em;
   height: 10em;
-  z-index: $level-layer-top;
+  z-index: $level-layer-top - 1;
 
   &:focus {
     transform: scale($size-scale-focus);
   }
 
   @include screens-smaller-than(sm) {
-    position: relative;
+    bottom: unset;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: unset;
   }
 }
 
