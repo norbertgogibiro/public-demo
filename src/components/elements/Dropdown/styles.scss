@@ -35,7 +35,7 @@ $-dropdown-z-index: $level-layer-top;
 
   &.dropdown-state-open {
     .dropdown-opener {
-      transform: scale($size-focus-scale);
+      transform: scale($size-scale-focus);
 
       @include screens-bigger-than(sm) {
         transform: none;

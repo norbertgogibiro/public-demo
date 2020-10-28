@@ -11,7 +11,7 @@
   z-index: $level-layer-top;
 
   &:focus {
-    transform: scale($size-focus-scale);
+    transform: scale($size-scale-focus);
   }
 
   @include screens-smaller-than(sm) {

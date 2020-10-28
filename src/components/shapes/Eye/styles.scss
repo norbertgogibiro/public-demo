@@ -190,6 +190,12 @@ $-size-eyeball: 250px;
   }
 }
 
+.is-eye-hovered {
+  .eye-clip {
+    transform: translate(-50%, -50%) scale(0.25);
+  }
+}
+
 // THEME-DEPENDENT COLORING:
 @each $theme-name in get-theme-names() {
   .#{$theme-name} {

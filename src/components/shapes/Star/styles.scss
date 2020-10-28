@@ -6,6 +6,7 @@ $-width: 946px;
 $-height: 696px;
 $-scale-normal: 0.45;
 $-scale-trippy: 0.56;
+$-scale-eyeHover: 0.35;
 
 .star {
   position: absolute;
@@ -35,6 +36,13 @@ $-scale-trippy: 0.56;
   .star {
     width: $-width * $-scale-trippy;
     height: $-height * $-scale-trippy;
+  }
+}
+
+.is-eye-hovered {
+  .star {
+    width: $-width * $-scale-eyeHover;
+    height: $-height * $-scale-eyeHover;
   }
 }
 

@@ -14,12 +14,13 @@ const stalledEyeClassName = 'is-stalled';
 
 const Eye = () => {
 	const [isFollowingCursorMovement, setCursorFollowingMode] = useState(true);
-	const [isHovered, setHoveredState] = useState(false);
 	const refCursorFollower = useRef();
 
 	const {
+		isEyeHovered,
 		isEyeTripping,
-		setLastDropTriggerTime
+		setEyeHoverState,
+		setLastDropTriggerTime,
 	} = useContext(AppContext);
 
 	const eyeDimensions = {
@@ -74,10 +75,10 @@ const Eye = () => {
 	}, [isFollowingCursorMovement]);
 
 	return (
-		<div
+		<button
 			className='eye-wrap'
-			onMouseOver={() => setHoveredState(true)}
-			onMouseLeave={() => setHoveredState(false)}
+			onMouseOver={() => setEyeHoverState(true)}
+			onMouseLeave={() => setEyeHoverState(false)}
 			onClick={() => setLastDropTriggerTime(new Date())}
 		>
 			<div className="eye-clip" style={{ width: `${eyeLidsWidthSimple}px` }}>
@@ -121,11 +122,11 @@ const Eye = () => {
 					<LidsShape
 						shouldBlinkOnClick
 						shouldBlinkAutomatically={!isEyeTripping}
-						shouldClose={isHovered}
+						shouldClose={isEyeHovered}
 					/>
 				</div >
 			</div >
-		</div>
+		</button>
 	);
 };
 
