@@ -1,7 +1,12 @@
 @use '../../../styles/settings' as *;
 @use "../../../styles/functions" as *;
 
+$-size-enhancerIcon: $size-letter-small;
+$-name-iconClass: 'svg-inline--fa';
+
 a {
+  position: relative;
+
   &,
   &:active,
   &:visited {
@@ -12,6 +17,19 @@ a {
   &:hover {
     outline: none;
     text-decoration: none;
+
+    .#{$-name-iconClass} {
+      transform: scale(1.1) rotate(unquote((360 / 5) / 2 + 'deg'));
+      opacity: 1;
+    }
+  }
+
+  .#{$-name-iconClass} {
+    position: absolute;
+    top: $-size-enhancerIcon / 3;
+    font-size: $-size-enhancerIcon;
+    transition: $speed-normal;
+    opacity: 0.8;
   }
 }
 
@@ -23,6 +41,10 @@ a {
       &:active,
       &:visited {
         color: get-color($theme-name, "link-general");
+
+        .#{$-name-iconClass} {
+          color: get-color($theme-name, "link-enhancerIcon");
+        }
       }
     }
   }
