@@ -5,13 +5,14 @@
 $-size-eye-height: 265px;
 $-size-eye-clip: 350px;
 $-size-eyeball: 250px;
+$-size-eye-wrap: calc(#{$-size-eye-clip} - 8em);
 
 .eye-wrap {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: calc(#{$-size-eye-clip} - 8em);
-  height: calc(#{$-size-eye-height} - 8em);
+  width: $-size-eye-wrap;
+  height: $-size-eye-wrap;
   transform: translate(-50%, -50%);
   z-index: $level-layer-high;
   border-radius: 50%;
@@ -19,6 +20,10 @@ $-size-eyeball: 250px;
   user-select: none;
   -webkit-touch-callout: none;
   -webkit-tap-highlight-color: transparent;
+
+  @include screens-smaller-than(md) {
+    transform: translate(-50%, -50%) scale($size-scale-mobile-star);
+  }
 }
 
 .eye-clip {
