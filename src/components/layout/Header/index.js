@@ -12,14 +12,14 @@ const navMenuItems = {
 		{ label: 'Youtube Music', href: 'https://music.youtube.com/channel/UCI-cVxCzSggq8Yk-9s-oEKQ' },
 		{ label: 'Soundcloud', href: 'https://soundcloud.com/paperdeer' }
 	],
-	News: [
-		{ label: 'Facebook', href: 'https://www.facebook.com/paperdeermusic' },
-	],
 	Videos: [
-		{ label: 'Youtube', href: 'https://www.youtube.com/user/PaperDeerOFFICIAL' },
+		{ label: 'Youtube', href: 'https://www.youtube.com/c/Paperdeer' },
 	],
 	Pictures: [
 		{ label: 'Instagram', href: 'https://www.instagram.com/paperdeermusic' },
+	],
+	News: [
+		{ label: 'Facebook', href: 'https://www.facebook.com/paperdeermusic' },
 	],
 	Concerts: [
 		{ label: 'Songkick', href: 'https://www.songkick.com/artists/8414153-paperdeer' },
