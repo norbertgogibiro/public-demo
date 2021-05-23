@@ -1,0 +1,41 @@
+@use '../../../styles/settings' as *;
+@use "../../../styles/functions" as *;
+@use '../../../styles/mixins' as *;
+
+.bandLogo {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 10em;
+  height: 10em;
+  z-index: $level-layer-top - 1;
+
+  &:focus {
+    transform: scale($size-scale-focus);
+  }
+
+  @include screens-smaller-than(sm) {
+    bottom: unset;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: unset;
+
+    &:focus {
+      transform: translateX(-50%);
+    }
+  }
+
+  // THEME-DEPENDENT COLORING:
+  @each $theme-name in get-theme-names() {
+    &.#{$theme-name} {
+      path {
+        fill: get-color($theme-name, "logo-desktop");
+
+        @include screens-smaller-than(sm) {
+          fill: get-color($theme-name, "logo-mobile");
+        }
+      }
+    }
+  }
+}

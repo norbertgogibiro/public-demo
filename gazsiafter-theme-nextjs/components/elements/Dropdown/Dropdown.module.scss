@@ -1,0 +1,106 @@
+@use '../../../styles/settings' as *;
+@use "../../../styles/functions" as *;
+@use '../../../styles/mixins' as *;
+
+$-triangle-size: 0.5em;
+$-dropdown-z-index: $level-layer-top;
+
+.dropdownContainer {
+  position: relative;
+
+  .dropdown {
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    top: calc(100% - #{$width-border-line});
+    left: 50%;
+    padding: 1em;
+    transform: translateX(-50%);
+    font-size: $size-letter-normal;
+    border-top-width: $width-border-line;
+    border-top-style: solid;
+    z-index: $-dropdown-z-index;
+    text-align: left;
+
+    @include screens-smaller-than(sm) {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      transform: none;
+      text-align: center;
+      transition: $speed-normal;
+    }
+  }
+
+  &.dropdownStateOpen {
+    .dropdownOpener {
+      transform: scale($size-scale-focus);
+
+      @include screens-bigger-than(sm) {
+        transform: none;
+
+        &:focus,
+        &:hover {
+          border-width: 0;
+          margin-bottom: $width-border-line;
+        }
+
+        &:before,
+        &:after {
+          content: "";
+          position: absolute;
+          left: 50%;
+          width: 0;
+          height: 0;
+          transform: translateX(-50%);
+          border-style: solid;
+          border-left-color: transparent;
+          border-right-color: transparent;
+          border-top: unset;
+        }
+
+        &:before {
+          top: calc(100% - #{$-triangle-size} - #{$width-border-line / 2});
+          border-width: calc(#{$-triangle-size} + #{$width-border-line});
+          z-index: $-dropdown-z-index - 1;
+        }
+
+        &:after {
+          top: calc(100% - #{$-triangle-size} + #{$width-border-line});
+          border-width: $-triangle-size;
+          z-index: $-dropdown-z-index + 1;
+        }
+      }
+    }
+
+    .dropdown {
+      visibility: visible;
+      opacity: 1;
+
+      @include screens-smaller-than(sm) {
+        transition: 0s;
+      }
+    }
+  }
+
+  // THEME-DEPENDENT COLORING:
+  @each $theme-name in get-theme-names() {
+    &.#{$theme-name} {
+      .dropdown {
+        background: get-color($theme-name, "dropdown-background");
+        color: get-color($theme-name, "dropdown-text");
+        border-color: get-color($theme-name, "dropdown-border");
+      }
+
+      .dropdownOpener {
+        &:before {
+          border-bottom-color: get-color($theme-name, "dropdown-border");
+        }
+        &:after {
+          border-bottom-color: get-color($theme-name, "dropdown-background");
+        }
+      }
+    }
+  }
+}

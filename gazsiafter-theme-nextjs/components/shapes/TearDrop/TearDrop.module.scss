@@ -1,0 +1,43 @@
+@use "../../../styles/functions" as *;
+@use "../../../styles/mixins" as *;
+@use "../../../styles/settings" as *;
+
+$-speed-eye-drops: 1s;
+
+.tearDrop {
+  position: absolute;
+  top:0;
+  left:0;
+  bottom:0;
+  right:0;
+  z-index: $level-layer-low;
+}
+
+.dropShape {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.5);
+  animation: drop-fall $-speed-eye-drops ease-in 0s 1 normal forwards;
+
+  // THEME-DEPENDENT COLORING:
+  @each $theme-name in get-theme-names() {
+    &.#{$theme-name} {
+        path {
+          fill: get-color($theme-name, "tear-drop");
+        }
+    }
+  }
+}
+
+@keyframes drop-fall {
+  from {
+    top: 50%;
+    transform: translate(-50%, -50%) scale(0.5);
+  }
+
+  to {
+    top: 150%;
+    transform: translate(-50%, -50%) scale(2);
+  }
+}

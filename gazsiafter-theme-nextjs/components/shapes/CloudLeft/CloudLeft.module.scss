@@ -1,0 +1,53 @@
+@use '../../../styles/settings' as *;
+@use '../../../styles/mixins' as *;
+@use "../../../styles/functions" as *;
+
+.cloudLeft {
+  position: absolute;
+  top: 0;
+  left: 0;
+  animation: cloud-left 10s ease-in-out infinite alternate-reverse;
+  transition: transform $speed-smoke;
+  z-index: $level-layer-middle;
+
+  .cloudLeftShape {
+    path {
+      transition: $speed-normal;
+    }
+  }
+
+  @include screens-smaller-than(sm) {
+    transform: translate(-10%, -70%) scale(0.8, -0.8);
+  }
+
+  &.isEyeTripping {
+    transform: scale(1.2);
+
+    @include screens-smaller-than(sm) {
+      transform: translate(-10%, -70%) scale(1, -1);
+    }
+  }
+
+  // THEME-DEPENDENT COLORING:
+  @each $theme-name in get-theme-names() {
+    &.#{$theme-name} {
+
+        .cloudLeftShape {
+          path {
+            fill: get-color($theme-name, "cloud-left");
+          }
+        }
+      }
+    }
+
+  
+}
+
+@keyframes cloud-left {
+  from {
+    top: 0%;
+  }
+  to {
+    top: 20%;
+  }
+}

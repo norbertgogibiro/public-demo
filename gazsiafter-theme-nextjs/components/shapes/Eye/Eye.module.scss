@@ -1,0 +1,270 @@
+@use "../../../styles/functions" as *;
+@use "../../../styles/mixins" as *;
+@use "../../../styles/settings" as *;
+
+$-size-eye-height: 265px;
+$-size-eye-clip: 350px;
+$-size-eyeball: 250px;
+$-size-eye-wrap: calc(#{$-size-eye-clip} - 8em);
+
+.eyeWrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: $-size-eye-wrap;
+  height: $-size-eye-wrap;
+  transform: translate(-50%, -50%);
+  z-index: $level-layer-high;
+  border-radius: 50%;
+  cursor: pointer;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-tap-highlight-color: transparent;
+
+  @include screens-smaller-than(md) {
+    transform: translate(-50%, -50%) scale($size-scale-mobile-star);
+  }
+}
+
+.eyeClip {
+  position: absolute;
+  height: $-size-eye-clip;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.3);
+  transition: transform $speed-smoke;
+  overflow: hidden;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: $-size-eye-clip;
+    height: $-size-eye-clip;
+    border-radius: 0 70%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    opacity: 1;
+    background: url('/images/texture_6.png');
+    @include background-glitch-animation()
+  }
+
+  .eye {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+
+    &:focus {
+      & > .eyeBall {
+        transform: translate(-50%, -50%) scale(1.3);
+      }
+    }
+
+    .eyeBallCursorFollower {
+      transition: background-color $speed-eye-blink;
+
+      &:after {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        opacity: 0.5;
+        background: url('/images/texture_1.png');
+        @include background-glitch-animation()
+      }
+
+      &.isEyeStalled {
+        transition: $speed-eye-blink;
+      }
+    }
+  }
+
+  .eyeLidsSimple {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  .eyeBallClip {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: calc(100% - #{$width-border-line});
+    height: calc(#{$-size-eye-height} - #{$width-border-line});
+    overflow: hidden;
+    transform: translate(-50%, -50%);
+  }
+
+  .eyeBallBoundary {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 70%;
+    height: 70%;
+    transform: translate(-50%, -50%);
+  }
+
+  .eyeBall {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: $-size-eyeball;
+    height: $-size-eyeball;
+    border-radius: 50%;
+    transition: 
+      top $speed-normal, 
+      left $speed-eye-blink,
+      background-color $speed-eye-blink;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+
+    & > .eyeInner {
+      visibility: hidden;
+      width: 100%;
+      height: 100%;
+
+      .eyeBall {
+        width: $-size-eyeball * 0.7;
+        height: $-size-eyeball * 0.7;
+
+        & > .eyeLidsSimple {
+          transform: translate(-50%, -50%) scale(0.5);
+          top: 50%;
+          left: 50%;
+        }
+
+        & > .eye {
+          transform: translate(-50%, -50%) scale(0.27);
+          top: 50%;
+          left: 50%;
+          overflow: hidden;
+
+          .eyeBall {
+            width: $-size-eyeball * 1.1;
+            height: $-size-eyeball * 1.1;
+          }
+
+          .eyeLidsSimple {
+            position: absolute;
+            transform: translate(-50%, -50%);
+            top: 50%;
+            left: 50%;
+          }
+        }
+      }
+
+      & > .eyeLids {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+
+        &.eyeLidsSimple {
+          transform: translate(-50%, -50%) scale(0.5) rotate(90deg);
+        }
+
+        &.eyeLidsCross {
+          transform: translate(-50%, -50%) scale(0.5);
+        }
+      }
+    }
+  }
+}
+
+.isEyeTripping {
+  .eyeClip {
+    transform: translate(-50%, -50%) scale(0.35);
+  }
+
+  .eyeBallCursorFollower {
+    transform: translate(-50%, -50%) scale(1.15);
+
+    & > .eyeInner {
+      transition: visibility $speed-eye-blink $speed-eye-blink;
+      visibility: visible;
+    }
+  }
+}
+
+.isEyeHovered {
+  .eyeClip {
+    transform: translate(-50%, -50%) scale(0.25);
+  }
+}
+
+// THEME-DEPENDENT COLORING:
+@each $theme-name in get-theme-names() {
+  .#{$theme-name} {
+    .eyeClip {
+      &:before {
+        background: get-color($theme-name, "eye-white-outermost");
+        transition: $speed-eye-blink;
+      }
+
+      .eyeLidsSimple {
+        path {
+          fill: get-color($theme-name, "star");
+        }
+      }
+
+      .eyeBall {
+        background: get-color($theme-name, "eye-ball-outermost-normal");
+
+        & > .eyeInner {
+          .eyeBall {
+            & > .eyeLidsSimple {
+              path {
+                fill: get-color($theme-name, "eye-ball-middle-outer");
+              }
+            }
+
+            & > .eye {
+              .eyeBall {
+                &.eyeBallInnermost {
+                  background: get-color($theme-name, "eye-ball-innermost");
+                }
+              }
+
+              .eyeLidsSimple {
+                &.eyeLidsInnermost {
+                  path {
+                    fill: get-color($theme-name, "eye-ball-middle-inner");
+                  }
+                }
+              }
+            }
+          }
+
+          & > .eyeLids {
+            &.eyeLidsSimple {
+              path {
+                fill: get-color($theme-name, "eye-white-middle-horizontal");
+              }
+            }
+            &.eyeLidsCross {
+              path {
+                fill: get-color($theme-name, "eye-ball-outermost-tripping");
+              }
+            }
+          }
+        }
+
+        & > .eye {
+          background: get-color($theme-name, "eye-white-middle-vertical");
+        }
+      }
+    }
+  }
+}

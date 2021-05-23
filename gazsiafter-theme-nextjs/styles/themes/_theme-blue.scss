@@ -1,0 +1,41 @@
+/*************************************************
+              -- COLOR SETTINGS --
+feel free to configure using color variable names
+*************************************************/
+@use "../settings.scss" as *;
+
+$export: (
+  "is-grayscale": false,
+  "theme-colors": (
+    
+    // ELEMENTS:
+    "logo-desktop": $color-black,
+    "logo-mobile": $color-black,
+    "background": $color-blue,
+    "background-trippy-layer": $color-black,
+    "link-general": $color-orange,
+    "link-email": $color-orange,
+    "link-enhancerIcon": $color-orange,
+    "dropdown-background": $color-black,
+    "dropdown-text": $color-yellow,
+    "dropdown-link-general": $color-yellow,
+    "dropdown-link-general-hover": $color-orange,
+    "dropdown-border": $color-yellow,
+    "menu-item-normal": $color-yellow,
+    "menu-item-alternative": $color-orange,
+  
+    // SHAPES:
+    "cloud-left": $color-orange,
+    "cloud-right": $color-orange,
+    "tear-drop": $color-yellow,
+    "eye-white-outermost": $color-yellow,
+    "eye-white-middle-vertical": $color-yellow,
+    "eye-white-middle-horizontal": $color-yellow,
+    "eye-ball-outermost-normal": $color-orange,
+    "eye-ball-outermost-tripping": $color-orange,
+    "eye-ball-middle-outer": $color-blue,
+    "eye-ball-middle-inner": $color-black,
+    "eye-ball-innermost": $color-orange,
+    "star": $color-black
+  )
+);

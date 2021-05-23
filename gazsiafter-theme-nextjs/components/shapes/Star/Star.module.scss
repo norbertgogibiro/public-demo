@@ -1,0 +1,66 @@
+@use "../../../styles/settings" as *;
+@use "../../../styles/mixins" as *;
+@use "../../../styles/functions" as *;
+
+$-width: 946px;
+$-height: 696px;
+$-scale-normal: 0.45;
+$-scale-trippy: 0.56;
+$-scale-eyeHover: 0.35;
+$-scale-mobile: $-scale-normal * $size-scale-mobile-star;
+
+.star {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: $-width * $-scale-normal;
+  height: $-height * $-scale-normal;
+  transform: translate(-50%, -50%);
+  transition: width $speed-smoke, height $speed-smoke, background-color $speed-normal;
+  animation: star 3.4s ease-in-out infinite alternate-reverse;
+  z-index: $level-layer-middle + 1;
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    opacity: 0.5;
+    background: url('/images/texture_6.png');
+    @include background-glitch-animation();
+  }
+
+  @include screens-smaller-than(md) {
+    width: $-width * $-scale-mobile;
+    height: $-height * $-scale-mobile;
+  }
+
+  &.isEyeTripping {
+      width: $-width * $-scale-trippy;
+      height: $-height * $-scale-trippy;
+  }
+
+  &.isEyeHovered {
+      width: $-width * $-scale-eyeHover;
+      height: $-height * $-scale-eyeHover;
+  }
+
+  // THEME-DEPENDENT COLORING:
+  @each $theme-name in get-theme-names() {
+    &.#{$theme-name} {
+        background: get-color($theme-name, "star");
+    }
+  }
+}
+
+@keyframes star {
+  from {
+    clip-path: polygon(28% 2%, 50% 26%, 73% 1%, 74% 31%, 98% 34%, 79% 53%, 98% 75%, 70% 73%, 68% 98%, 50% 76%, 34% 97%, 30% 73%, 4% 74%, 26% 54%, 1% 33%, 30% 30%);
+  }
+
+  to {
+    clip-path: polygon(30% 4%, 50% 24%, 70% 5%, 74% 31%, 96% 35%, 80% 53%, 95% 74%, 69% 72%, 68% 96%, 50% 78%, 34% 96%, 31% 72%, 5% 73%, 24% 52%, 2% 32%, 32% 32%);
+  }
+}
